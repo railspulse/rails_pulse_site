@@ -23,14 +23,14 @@
 }
 
 :root {
-  /** There features 
+  /** There features
   These are values that determine the overall look of the theme.
   - Saturation controls how much of accent color will be mixed into text, background, and surface colors.
   - Contrast controls how contrast the text colors will be.
   */
   --theme-hue: 255;
   --theme-saturation: 0.2; /* 0...1 where 0 means grayscale colors; 1 means fully saturated colors */
-  --theme-contrast: 0.8; /* 0...1 where 0 means low contrast; 1 means high contrast, black-n-white in fact */
+  --theme-contrast: 0.95; /* 0...1 where 0 means low contrast; 1 means high contrast, black-n-white in fact */
 
   /* Fonts */
   --font-text: "Inter Variable", Arial, sans-serif;
@@ -104,12 +104,13 @@
   /** Base color
   By default it's blue ≈ #0289ff
   Usually it's your brand color. Simply provide your value and the whole theme will be recalculated automatically.
-  Default value is in OKLCH because it produces richer P3 colors, however you can use any color format. 
+  Default value is in OKLCH because it produces richer P3 colors, however you can use any color format.
   */
   /* --color-accent: #00bc81; */
-  --color-accent: oklch(0.64 0.21 var(--theme-hue));
+  /* --color-accent: oklch(0.64 0.21 var(--theme-hue)); */
+  --color-accent: #ffc91f;
 
-  /* Relative colors 
+  /* Relative colors
   These colors are calculated based on the accent color and saturation/contrast values.
   Feel free to provide exact values if you want to override them.
   */
@@ -153,12 +154,12 @@
   /** Base color
   By default it's blue ≈ #0289ff
   Usually it's your brand color. Simply provide your value and the whole theme will be recalculated automatically.
-  Default value is in OKLCH because it produces richer P3 colors, however you can use any color format. 
+  Default value is in OKLCH because it produces richer P3 colors, however you can use any color format.
    */
   /* --colors-accent: #00bc81; */
   --color-accent: oklch(0.53 0.22 var(--theme-hue));
 
-  /* Relative colors 
+  /* Relative colors
   These colors are calculated based on the accent color and saturation/contrast values.
   Feel free to provide exact values if you want to override them.
   */
@@ -584,6 +585,17 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
+}
+
+.nav-brand img {
+  margin-right: 10px;
+}
+
+.nav-brand span {
+  color: black;
+  text-decoration: none;
+  font-size: 40px;
 }
 
 .nav-link {
@@ -815,4 +827,9 @@ section {
   padding: 2px 4px;
   border-radius: var(--radius-xs);
   color: var(--color-text-secondary);
+}
+
+.rounded-image {
+  border-radius: var(--radius-m);
+  border: 2px solid var(--color-border-level-2);
 }

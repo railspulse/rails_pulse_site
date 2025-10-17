@@ -1,35 +1,33 @@
 <!DOCTYPE html>
-<!-- Try theme-dark -->
 <html lang="en" class="theme-light">
 
 <head>
   <meta charset="utf-8" />
-  <title>LaunchKit — free template for devtool landing pages</title>
-  <meta content="Free template for devtool landing pages" name="description" />
+  <title>Rails Pulse — Performance monitoring and debugging for Rails applications</title>
+  <meta content="Comprehensive performance monitoring and debugging gem for Rails. Track response times, SQL queries, and route performance with a beautiful dashboard. Zero configuration, multiple database support." name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="LaunchKit" />
+  <meta property="og:site_name" content="Rails Pulse" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:title" content="LaunchKit" />
-  <meta property="og:description" content="Free template for devtool landing pages" />
-  <meta property="og:url" content="https://launchkit.evilmartians.io" />
-  <meta property="og:image" content="https://launchkit.evilmartians.io/social-image.png" />
+  <meta property="og:title" content="Rails Pulse — Performance monitoring and debugging for Rails" />
+  <meta property="og:description" content="Comprehensive performance monitoring and debugging gem for Rails applications. Track response times, SQL queries, and route performance with zero configuration." />
+  <meta property="og:url" content="https://github.com/railspulse/rails_pulse" />
+  <meta property="og:image" content="https://github.com/railspulse/rails_pulse/social-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta name="twitter:site" content="@evilmartians" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LaunchKit" />
-  <meta name="twitter:description" content="Free template for devtool landing pages" />
-  <meta name="twitter:image" content="https://launchkit.evilmartians.io/social-image.png" />
-  <meta name="twitter:url" content="https://launchkit.evilmartians.io" />
+  <meta name="twitter:title" content="Rails Pulse — Performance monitoring and debugging for Rails" />
+  <meta name="twitter:description" content="Comprehensive performance monitoring and debugging gem for Rails. Zero configuration, beautiful dashboard, multiple database support." />
+  <meta name="twitter:image" content="https://github.com/railspulse/rails_pulse/social-image.png" />
+  <meta name="twitter:url" content="https://github.com/railspulse/rails_pulse" />
 
   <!-- Favicon and icons -->
   <link rel="icon" href="images/favicon/favicon.ico" sizes="32x32" />
   <link rel="icon" href="images/favicon/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png" />
-  
+
   <!-- Preload fonts -->
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
 
@@ -45,25 +43,23 @@
   <div class="background-gradient"></div>
   <div class="page-container">
     <header class="nav-container">
-      <a href="index.html" class="nav-brand"><img src="images/Logo-Template.svg" width="132" height="28"
-          alt="Logo Template" /></a>
+      <a href="index.html" class="nav-brand">
+        <img src="images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
       <nav role="navigation" class="nav-menu" data-navigation>
-        <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="https://mintlify.com" class="nav-link">Docs ↗</a>
-        <a href="https://substack.com" class="nav-link">Blog ↗</a>
-        <a href="https://wellfound.com" class="nav-link">Careers ↗</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
         <div class="button-group stacked margin-top-l mobile-only">
-          <a href="#" class="button tertiary">Sign In</a>
-          <a href="#" class="button primary">Sign Up</a>
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
         </div>
       </nav>
       <div class="button-group">
-        <a href="https://github.com" class="button ghost compact hide-on-mobile">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
           <div class="fa-brands fa-github icon l"></div>
-          <div class="paragraph s tertiary">42K</div>
+          <div class="paragraph s tertiary">Star</div>
         </a>
-        <a href="#" class="button tertiary compact hide-on-mobile">Sign In</a>
-        <a href="#" class="button primary compact">Sign Up</a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
         <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
           <span class="fa-solid fa-bars icon m"></span>
         </button>
@@ -72,186 +68,138 @@
     <main>
       <section>
         <div class="heading hero centered">
-          <a href="#" class="eyebrow">Version 2.0 released!</a>
+          <a href="https://github.com/railspulse/rails_pulse/releases" class="eyebrow">Open Source & MIT Licensed</a>
           <h1 class="balanced">
-            Free template for devtool landing pages
+            Performance monitoring and debugging for Rails applications
           </h1>
           <p class="paragraph m secondary balanced">
-            Use this template to launch a landing page for your next developer tool or open-source project.
+            Built as a Rails Engine, Rails Pulse seamlessly integrates with your existing application to capture, analyze, and visualize performance metrics without impacting your production workload.
           </p>
           <div class="button-group margin-paragraph centered">
-            <a href="#" class="button primary">Sign Up</a>
-            <a href="#" class="button tertiary">Request a Demo</a>
+            <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+            <a href="https://github.com/railspulse/rails_pulse" class="button tertiary">View on GitHub</a>
           </div>
         </div>
         <div class="image-wide">
-          <img src="images/placeholder-main-ui.png" width="100%" style="aspect-ratio: 2356 / 1404"
-            alt="Main screenshot of the product" />
+          <img src="images/dashboard.jpg" width="100%" style="aspect-ratio: 2356 / 1404"
+            alt="Rails Pulse Dashboard showing performance metrics" />
         </div>
       </section>
-      <section>
-        <p class="paragraph l bold text-centered">
-          Trusted by fast-growing companies worldwide
-        </p>
-        <div class="clients-container">
-          <img src="images/logo-1.png" loading="lazy" width="111" alt="Logo of a client 2" /><img
-            src="images/logo-3.png" loading="lazy" width="51" alt="Logo of a client 1" /><img src="images/logo-2.png"
-            loading="lazy" width="56" alt="Logo of a client 3" /><img src="images/logo-3.png" loading="lazy" width="51"
-            alt="Logo of a client 1" /><img src="images/logo-1.png" loading="lazy" width="111"
-            alt="Logo of a client 2" /><img src="images/logo-2.png" loading="lazy" width="56"
-            alt="Logo of a client 3" /><img src="images/logo-3.png" loading="lazy" width="51"
-            alt="Logo of a client 1" /><img src="images/logo-1.png" loading="lazy" width="111"
-            alt="Logo of a client 2" />
-        </div>
-      </section>
-      <section>
+      <section id="features">
         <div class="heading">
-          <h2 class="no-top-margin">Feature showcase blocks</h2>
+          <h2 class="no-top-margin">Comprehensive Performance Monitoring</h2>
           <p class="paragraph m secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse varius enim in eros elementum tristique. Duis cursus,
-            mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-            libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum
-            lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
+            Rails Pulse provides deep insights into your Rails application's health with an interactive dashboard, SQL query tracking, and route-specific metrics—all without complex configuration.
           </p>
         </div>
         <div class="grid">
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 1
+                Interactive Dashboard
               </h3>
               <p class="paragraph m secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                tristique posuere.
+                Monitor your application with response time charts, request analytics, and week-over-week trend analysis. Beautiful responsive interface with dark/light mode support gives you actionable insights at a glance.
               </p>
             </div>
-            <img src="images/placeholder-feature-16-9.png" loading="lazy" width="100%"
-              alt="Screenshot of a feature 16 by 9" />
+            <img src="images/interactive-dashboard.gif" loading="lazy" width="100%"
+              alt="Dashboard with response time charts and analytics"
+              class="rounded-image" />
           </div>
         </div>
         <div class="grid columns-2">
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 2
+                SQL Query Performance
               </h3>
               <p class="paragraph s secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                tristique posuere.
+                Track SQL query performance with slow query identification and configurable thresholds. Quickly identify database bottlenecks and optimize your most expensive queries.
               </p>
             </div>
-            <img src="images/placeholder-feature-16-9.png" loading="lazy" width="100%"
-              alt="Screenshot of a feature 16 by 9" />
+            <img src="images/sql-query-performance.jpg" loading="lazy" width="100%"
+              alt="SQL query performance tracking interface" class="rounded-image" />
           </div>
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 3
+                Route-Specific Metrics
               </h3>
               <p class="paragraph s secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique.
+                Get granular insights with route-specific metrics and configurable performance thresholds. See exactly which endpoints need optimization.
               </p>
             </div>
-            <img src="images/placeholder-feature-4-3.png" loading="lazy" width="100%"
-              alt="Screenshot of a feature 4 by 3" />
+            <img src="images/routes-specific-metrics.jpg" loading="lazy" width="100%"
+              alt="Route performance metrics view" class="rounded-image" />
           </div>
         </div>
         <div class="grid columns-3">
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 4
+                Zero Configuration
               </h3>
               <p class="paragraph s secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique
+                Start collecting performance data immediately after installation with sensible defaults. No complex setup required.
               </p>
             </div>
-            <img src="images/placeholder-feature.png" loading="lazy" width="100%" alt="Screenshot of a feature" />
           </div>
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 5
+                Multiple Databases
               </h3>
               <p class="paragraph s secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                tristique posuere.
+                Full support for SQLite, PostgreSQL, and MySQL. Store monitoring data in your main database or use a separate dedicated database for complete isolation.
               </p>
             </div>
-            <img src="images/placeholder-feature-16-9.png" loading="lazy" width="100%"
-              alt="Screenshot of a feature 16 by 9" />
           </div>
           <div class="feature-card">
             <div class="feature-heading">
               <h3 class="color-accent no-top-margin">
-                Feature 6
+                Smart Data Cleanup
               </h3>
               <p class="paragraph s secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique
+                Automatic data archiving prevents database bloat while preserving essential insights. Configure time-based and count-based retention policies.
               </p>
             </div>
-            <img src="images/placeholder-feature-4-3.png" loading="lazy" width="100%"
-              alt="Screenshot of a feature 4 by 3" />
           </div>
         </div>
       </section>
       <section>
         <div class="heading centered">
-          <h2 class="no-top-margin">Cards with icons</h2>
+          <h2 class="no-top-margin">Built for Developers</h2>
           <p class="paragraph m secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse varius enim in eros elementum tristique. Duis cursus,
-            mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-            libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum
-            lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
+            Rails Pulse is designed with developer experience in mind. Everything you need to monitor, debug, and optimize your Rails application.
           </p>
         </div>
         <div class="cards-with-icons-container">
           <div class="card-with-icon horizontal">
-            <div class="fa-regular fa-gem icon xl color-accent"></div>
+            <div class="fa-solid fa-gauge-high icon xl color-accent"></div>
             <div class="feature-heading">
-              <p class="paragraph m bold">Lorem ipsum dolor sit amet</p>
+              <p class="paragraph m bold">Minimal Performance Overhead</p>
               <p class="paragraph m secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique
+                Smart caching and efficient instrumentation ensure Rails Pulse doesn't slow down your application while collecting metrics.
               </p>
             </div>
           </div>
           <div class="card-with-icon horizontal">
-            <div class="fa-solid fa-heart icon xl color-accent"></div>
+            <div class="fa-solid fa-shield-halved icon xl color-accent"></div>
             <div class="feature-heading">
-              <p class="paragraph m bold">Suspendisse varius enim in eros</p>
+              <p class="paragraph m bold">Flexible Authentication</p>
               <p class="paragraph m secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique
+                Secure your monitoring dashboard with built-in authentication support. Works seamlessly with Devise or any authentication system.
               </p>
             </div>
           </div>
           <div class="card-with-icon horizontal">
-            <div class="fa-regular fa-star icon xl color-accent"></div>
+            <div class="fa-solid fa-palette icon xl color-accent"></div>
             <div class="feature-heading">
               <p class="paragraph m bold">
-                Duis cursus, mi quis viverra ornare
+                Beautiful Interface
               </p>
               <p class="paragraph m secondary">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique
+                Modern, responsive design built with CSS Zero, Stimulus, and Turbo. Dark/light mode support and CSP-compliant by default.
               </p>
             </div>
           </div>
@@ -259,79 +207,58 @@
       </section>
       <section>
         <div class="heading">
-          <h2 class="no-top-margin">Block with one big image and CTA</h2>
+          <h2 class="no-top-margin">Quick Installation</h2>
           <p class="paragraph m secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse varius enim in eros elementum tristique. Duis cursus,
-            mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam
-            libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum
-            lorem imperdiet. Nunc ut sem vitae risus tristique posuere.
+            Add Rails Pulse to your application in minutes. Simply add the gem, run the installer, and you're ready to start monitoring.
           </p>
           <div class="button-group margin-paragraph">
-            <a href="#" class="button secondary">Request a Demo</a>
+            <a href="https://github.com/railspulse/rails_pulse#installation" class="button secondary">View Full Documentation</a>
           </div>
         </div>
         <div class="image-wide">
-          <img src="images/placeholder-main-ui.png" loading="lazy" width="100%" alt="Main screenshot of the product" />
+          <img src="images/request.jpg" loading="lazy" width="100%" alt="Rails Pulse interface showing request details" />
         </div>
       </section>
       <section>
         <div class="grid columns-1/2-1 gap-xl">
           <div class="heading">
-            <h2 class="no-top-margin">Description and a code block</h2>
+            <h2 class="no-top-margin">Get Started in Minutes</h2>
             <p class="paragraph m secondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse varius enim in eros elementum tristique. Duis
-              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-              commodo diam libero vitae erat. Aenean faucibus nibh et justo
-              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-              tristique posuere.
+              Add Rails Pulse to your Gemfile, run the installer, and mount the engine. That's it! Start monitoring your application's performance immediately with zero configuration.
             </p>
           </div>
           <div class="card-code-block dark">
-            <!-- Code is generated by Code to Markup. Go there if you want to update it: https://psd-coder.github.io/code-to-markup/?h=shiki&t=github-dark-default -->
-            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3"
-              tabindex="0"><code><span class="line"><span style="color:#8B949E"># lefthook.yml</span></span> 
-<span class="line"><span style="color:#8B949E"># See the FAQ for instructions</span></span>
-<span class="line"><span style="color:#8B949E"># on how to update this block.</span></span>
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Gemfile</span></span>
+<span class="line"><span style="color:#FF7B72">gem</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">'rails_pulse'</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#8B949E"># Build commit messages</span></span>
-<span class="line"><span style="color:#7EE787">prepare-commit-msg</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">  commands</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">    commitzen</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">      interactive</span><span style="color:#E6EDF3">: </span><span style="color:#79C0FF">true</span></span>
-<span class="line"><span style="color:#7EE787">      run</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">yarn run cz --hook</span></span>
-<span class="line"><span style="color:#7EE787">      env</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">        LEFTHOOK</span><span style="color:#E6EDF3">: </span><span style="color:#79C0FF">0</span></span>
+<span class="line"><span style="color:#8B949E"># Install</span></span>
+<span class="line"><span style="color:#E6EDF3">$ bundle install</span></span>
+<span class="line"><span style="color:#E6EDF3">$ rails generate rails_pulse:install</span></span>
+<span class="line"><span style="color:#E6EDF3">$ rails db:migrate</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#8B949E"># Validate commit messages</span></span>
-<span class="line"><span style="color:#7EE787">commit-msg</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">  commands</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#A5D6FF">    "lint commit message"</span><span style="color:#E6EDF3">:</span></span>
-<span class="line"><span style="color:#7EE787">      run</span><span style="color:#E6EDF3">: </span><span style="color:#A5D6FF">yarn run commitlint --edit {1}</span></span></code></pre>
+<span class="line"><span style="color:#8B949E"># config/routes.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">Rails.application.routes.draw </span><span style="color:#FF7B72">do</span></span>
+<span class="line"><span style="color:#E6EDF3">  mount RailsPulse::Engine </span><span style="color:#FF7B72">=&gt;</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"/rails_pulse"</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
           </div>
         </div>
       </section>
       <section>
         <div class="heading centered">
-          <h2 class="no-top-margin">FAQ</h2>
+          <h2 class="no-top-margin">Frequently Asked Questions</h2>
           <p class="paragraph m secondary">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Suspendisse varius enim in eros elementum tristique
+            Everything you need to know about Rails Pulse
           </p>
         </div>
         <div class="accordion-container">
           <details class="accordion-item" name="faq">
             <summary class="accordion-toggle">
-              <p class="paragraph m bold">How do I use this template?</p>
+              <p class="paragraph m bold">What Rails versions are supported?</p>
               <span class="accordion-chevron fa-solid fa-chevron-down"></span>
             </summary>
             <div class="accordion-content">
               <p>
-                First, clone the template to your account. Then, decide which
-                blocks make sense for your landing and delete the rest. Replace
-                all “Lorem ipsum” text with your copy, upload your images, and
-                set up actions for the buttons and links.
+                Rails Pulse supports Rails 7.2+ and Ruby 3.3+. It's built as a Rails Engine and follows Rails best practices, ensuring compatibility with the latest Rails versions.
               </p>
             </div>
           </details>
@@ -339,172 +266,110 @@
           <details class="accordion-item" name="faq">
             <summary class="accordion-toggle">
               <p class="paragraph m bold">
-                How do I adjust the color theme to match my brand identity?
+                Does Rails Pulse impact my application's performance?
               </p>
               <span class="accordion-chevron fa-solid fa-chevron-down"></span>
             </summary>
             <div class="accordion-content">
-              <p>You can update the color theme in two ways:</p>
+              <p>
+                Rails Pulse is designed with minimal performance overhead in mind. It uses smart caching, efficient instrumentation, and Rails' built-in ActiveSupport::Notifications to collect metrics without slowing down your application. You can enable or disable it per environment.
+              </p>
+            </div>
+          </details>
+
+          <details class="accordion-item" name="faq">
+            <summary class="accordion-toggle">
+              <p class="paragraph m bold">Can I use a separate database for Rails Pulse?</p>
+              <span class="accordion-chevron fa-solid fa-chevron-down"></span>
+            </summary>
+            <div class="accordion-content">
+              <p>Yes! Rails Pulse supports two database configurations:</p>
               <ol role="list">
                 <li>
-                  Switching between light and dark modes.<br />Apply the
-                  <span class="inline-code">theme-dark</span> class to the
-                  <span class="inline-code">html</span> element of any page to
-                  enable the dark theme.
-                  This will apply the theme across the entire page. If no class
-                  is set, the light theme is used by default.
+                  <strong>Single Database (default)</strong> - Stores data in your main application database. Simple setup with zero additional configuration.
                 </li>
                 <li>
-                  Customize the color palette.<br />Use
-                  <a href="https://codepen.io/romanshamin/full/QwWgNLN" target="_blank">this tool</a>
-                  to tweak the overall color theme. Adjust the two sliders until
-                  both themes match your brand’s vibe. Then, go to
-                  <span class="inline-code">index.css</span> and copy-paste the
-                  color codes from the tool into the corresponding
-                  <span class="inline-code">--colors</span> variable.
+                  <strong>Separate Database</strong> - Use a dedicated database for complete isolation. Supports SQLite, PostgreSQL, and MySQL. Perfect for scaling monitoring independently or using different database engines.
                 </li>
               </ol>
+              <p>Install with <code>--database=separate</code> flag to use a separate database.</p>
             </div>
           </details>
 
           <details class="accordion-item" name="faq">
             <summary class="accordion-toggle">
-              <p class="paragraph m bold">How can I update the code block?</p>
+              <p class="paragraph m bold">How do I secure the Rails Pulse dashboard?</p>
               <span class="accordion-chevron fa-solid fa-chevron-down"></span>
             </summary>
             <div class="accordion-content">
               <p>
-                The code block uses inline token styles and raw HTML which
-                reduces the bundle size. To update the code:
-              </p>
-              <ol role="list">
-                <li>
-                  Use
-                  <a href="https://psd-coder.github.io/code-to-markup/" target="_blank">this tool</a>
-                </li>
-                <li>Paste your code into the <i>Input code</i> field</li>
-                <li>
-                  Choose <i>Highlighter</i> and <i>Theme</i> you prefer (the
-                  demo on the right uses GitHub dark default from Shiki), as
-                  well as the
-                  <i>Language</i>
-                </li>
-                <li>Follow the instructions in <i>How to use the generated HTML</i> section</li>
-                <li>
-                  Press <i>Copy HTML</i> and paste the copied HTML into the
-                  <span class="inline-code">&lt;div class="card-code-block
-                    dark"&gt;…&lt;/div&gt;</span>
-                  block
-                </li>
-              </ol>
-            </div>
-          </details>
-
-          <details class="accordion-item" name="faq">
-            <summary class="accordion-toggle">
-              <p class="paragraph m bold">How can I use a different icon?</p>
-              <span class="accordion-chevron fa-solid fa-chevron-down"></span>
-            </summary>
-            <div class="accordion-content">
-              <p>
-                This template uses Font Awesome icons as classes, which makes
-                it easy to add them to buttons and links.
-              </p>
-              <p>To add a new icon:</p>
-              <ol role="list">
-                <li>
-                  Go to
-                  <a href="https://fontawesome.com/icons" target="_blank">fontawesome.com/icons</a>
-                </li>
-                <li>Search for an icon in the free set</li>
-                <li>Copy the HTML code</li>
-                <li>
-                  Paste it into a place where you want the icon to appear
-                </li>
-              </ol>
-            </div>
-          </details>
-
-          <details class="accordion-item" name="faq">
-            <summary class="accordion-toggle">
-              <p class="paragraph m bold">How do I add a new page?</p>
-              <span class="accordion-chevron fa-solid fa-chevron-down"></span>
-            </summary>
-            <div class="accordion-content">
-              <p>
-                Simply copy <span class="inline-code">index.html</span>,
-                rename it, and edit it to your liking.
+                Rails Pulse includes flexible authentication support. You can configure authentication in the initializer to work with Devise, custom authentication systems, or any authentication method. Simply define your authentication logic in the configuration.
               </p>
             </div>
           </details>
 
           <details class="accordion-item" name="faq">
             <summary class="accordion-toggle">
-              <p class="paragraph m bold">How do I add update the favicon?</p>
+              <p class="paragraph m bold">How does data cleanup work?</p>
               <span class="accordion-chevron fa-solid fa-chevron-down"></span>
             </summary>
             <div class="accordion-content">
               <p>
-                Read
-                <a href="https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs"
-                  target="_blank">this article</a>
-                to prepare your own favicon, or use free online tools like
-                <a href="https://favicon.io/favicon-converter/" target="_blank">this one</a>.
-              </p>
-            </div>
-          </details>
-
-          <details class="accordion-item" name="faq">
-            <summary class="accordion-toggle">
-              <p class="paragraph m bold">How do I add update the OG image?</p>
-              <span class="accordion-chevron fa-solid fa-chevron-down"></span>
-            </summary>
-            <div class="accordion-content">
-              <p>
-                Open Graph (OG) image, or social image, increases the
-                click-through rate of your links on social media. Follow these
-                steps to update it:
+                Rails Pulse offers automatic data archiving with two strategies:
               </p>
               <ol role="list">
                 <li>
-                  Design your own OG image, or use free online tools like
-                  <a href="https://tailwind-generator.com/og-image-generator/generator" target="_blank">this one</a>.
+                  <strong>Time-based cleanup</strong> - Automatically delete records older than a configured period (default: 2 weeks)
                 </li>
                 <li>
-                  Replace <span class="inline-code">social-image.png</span>
-                </li>
-                <li>
-                  If you don’t need OG image, remove all
-                  <span class="inline-code">meta</span> tags below
-                  <span class="inline-code">Open Graph</span> comment
+                  <strong>Count-based cleanup</strong> - Enforce maximum record limits per table to prevent excessive storage use
                 </li>
               </ol>
+              <p>
+                Schedule the <code>RailsPulse::CleanupJob</code> to run daily, or run cleanup manually with <code>rails rails_pulse:cleanup</code>.
+              </p>
             </div>
           </details>
 
           <details class="accordion-item" name="faq">
             <summary class="accordion-toggle">
-              <p class="paragraph m bold">How do I publish my website?</p>
+              <p class="paragraph m bold">Is Rails Pulse free?</p>
               <span class="accordion-chevron fa-solid fa-chevron-down"></span>
             </summary>
             <div class="accordion-content">
               <p>
-                This template consists of static files (HTML, CSS, JS), so it’s ready to go. Once you have you landing
-                page ready, you can host it on any static hosting service — like
-                <a href="https://www.youtube.com/watch?v=J-DNqmhi2eg" target="_blank">Netlify</a>,
-                <a href="https://www.youtube.com/watch?v=E8xaV6fiTaA" target="_blank">Vercel</a>, Firebase, GitHub
-                Pages, or your own server. Just upload the files and you’re live.
+                Yes! Rails Pulse is completely free and open source under the MIT License. No subscription fees, no usage limits, and no external dependencies. All performance data stays in your database.
               </p>
+            </div>
+          </details>
+
+          <details class="accordion-item" name="faq">
+            <summary class="accordion-toggle">
+              <p class="paragraph m bold">How is Rails Pulse different from APM services?</p>
+              <span class="accordion-chevron fa-solid fa-chevron-down"></span>
+            </summary>
+            <div class="accordion-content">
+              <p>
+                Rails Pulse offers several advantages:
+              </p>
+              <ul role="list">
+                <li><strong>No external dependencies</strong> - Everything runs in your Rails application</li>
+                <li><strong>Zero monthly costs</strong> - No subscription fees or usage-based pricing</li>
+                <li><strong>Data privacy</strong> - All metrics stay in your database</li>
+                <li><strong>Full customization</strong> - Complete control over thresholds and interface</li>
+                <li><strong>Rails-native</strong> - Built specifically for Rails with deep framework integration</li>
+              </ul>
+              <p>Perfect for development, staging, and cost-conscious production monitoring.</p>
             </div>
           </details>
         </div>
       </section>
       <section class="promo-cta">
         <div class="heading centered">
-          <h2>Start using our product today</h2>
+          <h2>Start monitoring your Rails app today</h2>
           <div class="button-group margin-paragraph centered">
-            <a href="#" class="button primary">Sign Up</a>
-            <a href="#" class="button tertiary">Request a Demo</a>
+            <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+            <a href="https://github.com/railspulse/rails_pulse" class="button tertiary">View on GitHub</a>
           </div>
         </div>
       </section>
@@ -513,41 +378,36 @@
       <div class="footer-menu">
         <div>
           <p class="paragraph s">
-            © 2025 LoremIpsumInc<br />By <a href="https://evilmartians.com" target="_blank">Evil Martians</a>, product
-            consulting for
-            developer tools<br />Built with <a href="https://launchkit.evilmartians.io" target="_blank">LaunchKit</a>
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
           </p>
         </div>
         <div>
           <div class="link-list">
-            <a href="pricing.html" class="ui s">Pricing</a>
-            <a href="licenses.html" class="ui s">Licenses</a>
-            <a href="https://mintlify.com" class="ui s" target="_blank">Docs ↗</a>
-            <a href="https://substack.com" class="ui s" target="_blank">Blog ↗</a>
-            <a href="https://wellfound.com" class="ui s" target="_blank">Careers ↗</a>
+            <a href="https://github.com/railspulse/rails_pulse#installation" class="ui s">Installation</a>
+            <a href="https://github.com/railspulse/rails_pulse#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
           </div>
         </div>
         <div>
           <div class="link-list">
-            <a href="https://github.com" class="icon-link ui s" target="_blank">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
               <div class="fa-brands fa-github icon m color-accent"></div>
               <div class="pseudo-link">GitHub</div>
             </a>
-            <a href="https://www.linkedin.com" class="icon-link ui s" target="_blank">
-              <div class="fa-brands fa-linkedin icon m color-accent"></div>
-              <div class="pseudo-link">LinkedIn</div>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
             </a>
-            <a href="https://x.com" class="icon-link ui s" target="_blank">
-              <div class="fa-brands fa-x-twitter icon m color-accent"></div>
-              <div class="pseudo-link">X.com</div>
+            <a href="licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
             </a>
           </div>
         </div>
       </div>
       <div class="link-list-horizontal">
-        <a href="#" class="ui s tertiary">Privacy Policy</a>
-        <a href="#" class="ui s tertiary">Terms of Service</a>
-        <a href="#" class="ui s tertiary">Cookie Policy</a>
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
       </div>
     </footer>
   </div>

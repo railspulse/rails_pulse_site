@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="theme-light">
 
 <head>
   <meta charset="utf-8" />
-  <title>Licenses</title>
-  <meta content="Licenses" property="og:title" />
-  <meta content="Licenses" property="twitter:title" />
+  <title>Licenses — Rails Pulse</title>
+  <meta content="Open source licenses and attributions for Rails Pulse" name="description" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
-  <link href="css/index.css" rel="stylesheet" type="text/css" />
-  <link href="css/tablet.css" rel="stylesheet" type="text/css" />
-  <link href="css/mobile.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <!-- Favicon and icons -->
   <link rel="icon" href="images/favicon/favicon.ico" sizes="32x32" />
   <link rel="icon" href="images/favicon/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="images/favicon/apple-touch-icon.png" />
+
+  <!-- Styles -->
+  <link href="vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="css/index.css" rel="stylesheet" type="text/css" />
+  <link href="css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="css/mobile.css" rel="stylesheet" type="text/css" />
   <script src="js/main.js" type="text/javascript" defer></script>
   <meta name="robots" content="noindex" />
 </head>
@@ -22,26 +25,22 @@
   <div class="background-gradient"></div>
   <div class="page-container">
     <header class="nav-container">
-      <a href="index.html" class="nav-brand"><img src="images/Logo-Template.svg" loading="lazy"
-          alt="Logo Template" /></a>
+      <a href="index.html" class="nav-brand"><img src="images/Logo-Template.svg" width="132" height="28"
+          alt="Rails Pulse" /></a>
       <nav role="navigation" class="nav-menu" data-navigation>
-        <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="https://mintlify.com" class="nav-link">Docs ↗</a>
-        <a href="https://substack.com" class="nav-link">Blog ↗</a>
-        <a href="https://wellfound.com" class="nav-link">Careers ↗</a>
+        <a href="index.html#features" class="nav-link">Features</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
         <div class="button-group stacked margin-top-l mobile-only">
-          <a href="#" class="button tertiary">Sign In</a>
-          <a href="#" class="button primary">Sign Up</a>
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
         </div>
       </nav>
       <div class="button-group">
-        <a href="https://github.com" class="button ghost compact hide-on-mobile">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
           <div class="fa-brands fa-github icon l"></div>
-          <div class="paragraph s tertiary">42K</div>
+          <div class="paragraph s tertiary">Star</div>
         </a>
-        <a href="#" class="button tertiary compact hide-on-mobile">Sign In</a>
-        <a href="#" class="button primary compact">Sign Up</a>
-        <button class="button ghost compact nav-hamburger" data-mobile-toggle>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
           <span class="fa-solid fa-bars icon m"></span>
         </button>
       </div>
@@ -49,11 +48,10 @@
     <main>
       <section>
         <div class="text-centered full-width">
-          <h1>Licenses</h1>
+          <h1>Open Source Licenses</h1>
           <p class="balanced">
-            All graphical assets in this template are licensed for personal and
-            commercial use. If you’d like to use a specific asset,
-            please check the license below.
+            Rails Pulse is built on amazing open-source technologies. This page acknowledges
+            the projects and assets that make Rails Pulse possible.
           </p>
         </div>
         <div class="grid columns-3 margin-top-xl">
@@ -61,15 +59,106 @@
             <div class="justified-vertically">
               <div class="vertical-stretch-content---align-top">
                 <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">Rails Pulse</p>
+                  <p class="paragraph s">
+                    Rails Pulse is released under the
+                    <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+                    You are free to use, modify, and distribute it for personal and commercial purposes.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">Ruby on Rails</p>
+                  <p class="paragraph s">
+                    Built as a Rails Engine using
+                    <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a>,
+                    released under the
+                    <a href="https://github.com/rails/rails/blob/main/MIT-LICENSE" target="_blank">MIT License</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">Hotwire</p>
+                  <p class="paragraph s">
+                    Uses <a href="https://stimulus.hotwired.dev/" target="_blank">Stimulus</a> and
+                    <a href="https://turbo.hotwired.dev/" target="_blank">Turbo</a>
+                    for JavaScript interactivity, both under the
+                    <a href="https://github.com/hotwired/stimulus/blob/main/MIT-LICENSE" target="_blank">MIT License</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid columns-3 margin-top-l">
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">CSS Zero</p>
+                  <p class="paragraph s">
+                    Modern utility-first CSS framework by
+                    <a href="https://github.com/lazaronixon/css-zero" target="_blank">CSS Zero</a>,
+                    released under the
+                    <a href="https://github.com/lazaronixon/css-zero/blob/main/LICENSE.txt" target="_blank">MIT License</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">Rails Charts</p>
+                  <p class="paragraph s">
+                    Chart visualization using
+                    <a href="https://github.com/railsjazz/rails_charts" target="_blank">Rails Charts</a>,
+                    a wrapper around Apache ECharts, under the
+                    <a href="https://github.com/railsjazz/rails_charts/blob/main/LICENSE.txt" target="_blank">MIT License</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
+                  <p class="paragraph l bold no-top-margin">Lucide Icons</p>
+                  <p class="paragraph s">
+                    Beautiful iconography from
+                    <a href="https://lucide.dev/" target="_blank">Lucide</a>,
+                    released under the
+                    <a href="https://lucide.dev/license" target="_blank">ISC License</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid columns-3 margin-top-l">
+          <div class="feature-card">
+            <div class="justified-vertically">
+              <div class="vertical-stretch-content---align-top">
+                <div class="feature-heading">
                   <p class="paragraph l bold no-top-margin">Fonts</p>
                   <p class="paragraph s">
-                    The template uses two fonts:
-                    <a href="https://fonts.google.com/specimen/Inter" target="_blank">Inter</a>,
-                    and
+                    This template uses
+                    <a href="https://fonts.google.com/specimen/Inter" target="_blank">Inter</a> and
                     <a href="https://fonts.google.com/specimen/JetBrains+Mono" target="_blank">JetBrains Mono</a>,
-                    open-source fonts
-                    from Google Fonts. Use them according
-                    to corresponding license agreement.
+                    open-source fonts from Google Fonts under the
+                    <a href="https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL" target="_blank">SIL Open Font License</a>.
                   </p>
                 </div>
               </div>
@@ -79,13 +168,12 @@
             <div class="justified-vertically">
               <div class="vertical-stretch-content---align-top">
                 <div class="feature-heading">
-                  <p class="paragraph l bold no-top-margin">Icons</p>
+                  <p class="paragraph l bold no-top-margin">Font Awesome</p>
                   <p class="paragraph s">
-                    All icons are free set from
-                    <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>.<br />Use them according to the
-                    Font
-                    Awesome&#x27;s
-                    <a href="https://fontawesome.com/license" target="_blank">license agreement</a>.
+                    Icons from the free set of
+                    <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>,
+                    used according to their
+                    <a href="https://fontawesome.com/license/free" target="_blank">license agreement</a>.
                   </p>
                 </div>
               </div>
@@ -95,12 +183,11 @@
             <div class="justified-vertically">
               <div class="vertical-stretch-content---align-top">
                 <div class="feature-heading">
-                  <p class="paragraph l bold no-top-margin">Images</p>
+                  <p class="paragraph l bold no-top-margin">Template</p>
                   <p class="paragraph s">
-                    All visuals are original designs. <br />These images are
-                    free to use within this template under a CC0 (Public Domain
-                    Dedication) license, meaning you can use them without
-                    attribution.
+                    This landing page is built with
+                    <a href="https://launchkit.evilmartians.io" target="_blank">LaunchKit</a>
+                    by Evil Martians, a free template for developer tools.
                   </p>
                 </div>
               </div>
@@ -108,46 +195,52 @@
           </div>
         </div>
       </section>
+      <section>
+        <div class="text-centered full-width">
+          <h2>Additional Dependencies</h2>
+          <p class="paragraph m secondary balanced">
+            Rails Pulse also uses several other open-source Ruby gems including Request Store,
+            and various Rails ecosystem libraries. For a complete list of dependencies,
+            see the <a href="https://github.com/railspulse/rails_pulse/blob/main/rails_pulse.gemspec" target="_blank">gemspec file</a>.
+          </p>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <div class="footer-menu">
         <div>
           <p class="paragraph s">
-            © 2025 LoremIpsumInc<br />By <a href="https://evilmartians.com" target="_blank">Evil Martians</a>, product
-            consulting for
-            developer tools<br />Built with <a href="https://launchkit.evilmartians.io" target="_blank">LaunchKit</a>
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
           </p>
         </div>
         <div>
           <div class="link-list">
-            <a href="pricing.html" class="ui s">Pricing</a>
-            <a href="licenses.html" class="ui s">Licenses</a>
-            <a href="https://mintlify.com" class="ui s" target="_blank">Docs ↗</a>
-            <a href="https://substack.com" class="ui s" target="_blank">Blog ↗</a>
-            <a href="https://wellfound.com" class="ui s" target="_blank">Careers ↗</a>
+            <a href="https://github.com/railspulse/rails_pulse#installation" class="ui s">Installation</a>
+            <a href="https://github.com/railspulse/rails_pulse#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/wiki" class="ui s" target="_blank">Documentation ↗</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
           </div>
         </div>
         <div>
           <div class="link-list">
-            <a href="https://github.com" class="icon-link ui s" target="_blank">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
               <div class="fa-brands fa-github icon m color-accent"></div>
               <div class="pseudo-link">GitHub</div>
             </a>
-            <a href="https://www.linkedin.com" class="icon-link ui s" target="_blank">
-              <div class="fa-brands fa-linkedin icon m color-accent"></div>
-              <div class="pseudo-link">LinkedIn</div>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
             </a>
-            <a href="https://x.com" class="icon-link ui s" target="_blank">
-              <div class="fa-brands fa-x-twitter icon m color-accent"></div>
-              <div class="pseudo-link">X.com</div>
+            <a href="licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
             </a>
           </div>
         </div>
       </div>
       <div class="link-list-horizontal">
-        <a href="#" class="ui s tertiary">Privacy Policy</a>
-        <a href="#" class="ui s tertiary">Terms of Service</a>
-        <a href="#" class="ui s tertiary">Cookie Policy</a>
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
       </div>
     </footer>
   </div>
