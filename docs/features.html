@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Features - Rails Pulse Documentation</title>
+  <meta content="Explore Rails Pulse features including dashboard, SQL tracking, background jobs, and route metrics" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link active">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Features</h1>
+            <p class="paragraph m secondary">
+              Rails Pulse provides comprehensive performance monitoring with an intuitive dashboard, detailed metrics, and powerful debugging tools.
+            </p>
+          </div>
+        </section>
+
+        <section id="performance-monitoring">
+          <h2>Performance Monitoring</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Interactive Dashboard</h3>
+              <p class="paragraph s secondary">
+                Monitor your application with response time charts, request analytics, and week-over-week trend analysis. Beautiful responsive interface with dark/light mode support.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">SQL Query Tracking</h3>
+              <p class="paragraph s secondary">
+                Track SQL query performance with slow query identification and configurable thresholds. Quickly identify database bottlenecks.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Route-Specific Metrics</h3>
+              <p class="paragraph s secondary">
+                Get granular insights with route-specific metrics and configurable performance thresholds. See exactly which endpoints need optimization.
+              </p>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Background Job Monitoring</h3>
+              <p class="paragraph s secondary">
+                Comprehensive job tracking with execution monitoring, failure analysis, and performance metrics across all ActiveJob adapters.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="background-jobs">
+          <h2>Background Job Tracking</h2>
+          <p class="paragraph m">
+            Rails Pulse provides universal job tracking compatible with all ActiveJob adapters:
+          </p>
+          <ul>
+            <li><strong>Universal job tracking</strong> compatible with all ActiveJob adapters</li>
+            <li>Monitor job performance, failures, and retries</li>
+            <li>Track individual job executions with detailed metrics</li>
+            <li>View operations and SQL queries executed during jobs</li>
+            <li>Configurable privacy controls for job arguments</li>
+          </ul>
+
+          <h3>Supported Adapters</h3>
+          <p class="paragraph m">Works seamlessly with:</p>
+          <ul>
+            <li><strong>Sidekiq</strong> - Enhanced tracking via custom middleware</li>
+            <li><strong>Solid Queue</strong> - Universal ActiveJob tracking</li>
+            <li><strong>Good Job</strong> - Universal ActiveJob tracking</li>
+            <li><strong>Delayed Job</strong> - Enhanced tracking via custom plugin</li>
+            <li><strong>Resque</strong> - Universal ActiveJob tracking</li>
+            <li><strong>Any ActiveJob adapter</strong> - Falls back to universal tracking</li>
+          </ul>
+
+          <div class="docs-note">
+            <p class="paragraph m bold">No Configuration Required</p>
+            <p class="paragraph m">
+              Job tracking works out of the box with your existing setup. Access the jobs dashboard at <code>/rails_pulse/jobs</code> to view aggregate metrics, individual executions, and filter by time range, status, queue, and performance thresholds.
+            </p>
+          </div>
+        </section>
+
+        <section id="developer-experience">
+          <h2>Developer Experience</h2>
+          <div class="cards-with-icons-container">
+            <div class="card-with-icon">
+              <div class="fa-solid fa-bolt icon xl color-accent"></div>
+              <div class="feature-heading">
+                <p class="paragraph m bold">Zero Configuration</p>
+                <p class="paragraph m secondary">
+                  Start collecting performance data immediately after installation with sensible defaults. No complex setup required.
+                </p>
+              </div>
+            </div>
+            <div class="card-with-icon">
+              <div class="fa-solid fa-palette icon xl color-accent"></div>
+              <div class="feature-heading">
+                <p class="paragraph m bold">Beautiful Interface</p>
+                <p class="paragraph m secondary">
+                  Modern, responsive design with dark/light mode. Built with CSS Zero, Stimulus, and Turbo for a smooth experience.
+                </p>
+              </div>
+            </div>
+            <div class="card-with-icon">
+              <div class="fa-solid fa-gauge-high icon xl color-accent"></div>
+              <div class="feature-heading">
+                <p class="paragraph m bold">Minimal Overhead</p>
+                <p class="paragraph m secondary">
+                  Smart caching and efficient instrumentation ensure Rails Pulse doesn't slow down your application while collecting metrics.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="organization">
+          <h2>Organization & Filtering</h2>
+          <p class="paragraph m">
+            Rails Pulse includes a flexible tagging system for organizing and filtering your performance data:
+          </p>
+          <ul>
+            <li>Tag routes, requests, queries, jobs, and job runs with custom labels</li>
+            <li>Filter performance data by custom tags</li>
+            <li>Organize monitoring data by environment, priority, or custom categories</li>
+            <li>Tags appear as badges in all data tables for quick visual identification</li>
+          </ul>
+          <p class="paragraph m secondary">
+            Learn more about the tagging system in the <a href="advanced.html#tagging">Advanced Configuration</a> documentation.
+          </p>
+        </section>
+
+        <section id="technology-stack">
+          <h2>Technology Stack</h2>
+          <p class="paragraph m">
+            Rails Pulse is built using modern, battle-tested technologies:
+          </p>
+
+          <h3>Frontend Technologies</h3>
+          <ul>
+            <li><strong>CSS Zero</strong> - Modern utility-first CSS framework bundled for asset independence</li>
+            <li><strong>Stimulus</strong> - Progressive JavaScript framework for enhanced interactivity</li>
+            <li><strong>Turbo</strong> - Fast navigation and real-time updates without full page reloads</li>
+            <li><strong>Turbo Frames</strong> - Lazy loading and partial page updates for optimal performance</li>
+          </ul>
+
+          <h3>Data Visualization</h3>
+          <ul>
+            <li><strong>Rails Charts</strong> - Rails wrapper around Apache ECharts</li>
+            <li><strong>Lucide Icons</strong> - Beautiful, consistent iconography with pre-compiled SVG bundle</li>
+          </ul>
+
+          <h3>Asset Management</h3>
+          <ul>
+            <li><strong>Pre-compiled Assets</strong> - All CSS, JavaScript, and icons bundled into the gem</li>
+            <li><strong>CSP-Safe Implementation</strong> - Secure DOM methods and nonce-based asset loading</li>
+            <li><strong>Zero External Dependencies</strong> - Self-contained assets work with any Rails build system</li>
+          </ul>
+        </section>
+
+        <section id="database-support">
+          <h2>Multiple Database Support</h2>
+          <p class="paragraph m">
+            Rails Pulse supports multiple database backends:
+          </p>
+          <ul>
+            <li><strong>SQLite</strong> - Perfect for development and small applications</li>
+            <li><strong>PostgreSQL</strong> - Production-ready with excellent performance</li>
+            <li><strong>MySQL</strong> - Full compatibility with MySQL/MariaDB</li>
+          </ul>
+          <p class="paragraph m">
+            You can store Rails Pulse data in your main database or use a separate dedicated database for complete isolation.
+          </p>
+          <p class="paragraph m secondary">
+            See the <a href="database.html">Database</a> documentation for configuration options.
+          </p>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Setup Authentication</h3>
+              <p class="paragraph s secondary">
+                Secure your monitoring dashboard with flexible authentication options.
+              </p>
+              <a href="authentication.html" class="button secondary compact">Configure Auth →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Advanced Configuration</h3>
+              <p class="paragraph s secondary">
+                Customize thresholds, tagging, and data retention policies.
+              </p>
+              <a href="advanced.html" class="button secondary compact">View Advanced →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

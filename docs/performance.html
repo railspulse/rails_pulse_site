@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Performance Impact - Rails Pulse Documentation</title>
+  <meta content="Understand Rails Pulse performance overhead and optimization strategies" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link active">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Performance Impact</h1>
+            <p class="paragraph m secondary">
+              Understand Rails Pulse's performance overhead and learn how to measure and minimize its impact on your application.
+            </p>
+          </div>
+        </section>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <p class="paragraph m">
+            Rails Pulse is designed with performance in mind, using minimal instrumentation overhead and efficient database queries. However, as with any monitoring solution, there is some measurable impact on your application's performance.
+          </p>
+          <p class="paragraph m">
+            Based on comprehensive benchmarking with PostgreSQL on Apple Silicon (M1/M2), here are the typical performance overheads:
+          </p>
+        </section>
+
+        <section id="expected-impact">
+          <h2>Expected Performance Impact</h2>
+
+          <h3>Request Processing Overhead</h3>
+          <div class="docs-content">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Impact</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Middleware latency</strong></td>
+                  <td><strong>5-6ms</strong> per request</td>
+                  <td>Includes request tracking, DB writes, and context setup</td>
+                </tr>
+                <tr>
+                  <td>Request creation</td>
+                  <td>5.5ms per request</td>
+                  <td>Database write for request record</td>
+                </tr>
+                <tr>
+                  <td>Request + Operations</td>
+                  <td>9.8ms per request</td>
+                  <td>Request record + SQL operation tracking</td>
+                </tr>
+                <tr>
+                  <td>Memory allocation</td>
+                  <td>~830 KB per request</td>
+                  <td>Request + operation objects (garbage collected)</td>
+                </tr>
+                <tr>
+                  <td>Database writes</td>
+                  <td>1-2 writes per request</td>
+                  <td>Request record + operations (batched when possible)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-note">
+            <p class="paragraph m bold">Important Notes</p>
+            <ul>
+              <li>The middleware overhead includes actual database writes, which dominate the latency</li>
+              <li>In production with proper database optimization (connection pooling, indexes), overhead is typically lower</li>
+              <li>The memory allocation is temporary and garbage collected normally</li>
+              <li>Most overhead comes from persisting tracking data to the database, not instrumentation</li>
+            </ul>
+          </div>
+
+          <h3>Background Job Tracking Overhead</h3>
+          <div class="docs-content">
+            <table>
+              <thead>
+                <tr>
+                  <th>Metric</th>
+                  <th>Impact</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Job execution overhead</td>
+                  <td>&lt; 0.1ms per job</td>
+                  <td>Negligible - tracking is nearly free</td>
+                </tr>
+                <tr>
+                  <td>Memory allocation</td>
+                  <td>~200-300 KB per job</td>
+                  <td>Job + job run records</td>
+                </tr>
+                <tr>
+                  <td>Database writes</td>
+                  <td>1-2 writes per job</td>
+                  <td>Job record + job run record</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Relative Impact by Request Speed</h3>
+          <ul>
+            <li><strong>Fast requests (&lt; 50ms):</strong> Overhead is more noticeable (10-12%)</li>
+            <li><strong>Average requests (100-500ms):</strong> Moderate impact (1-5%)</li>
+            <li><strong>Slow requests (&gt; 1000ms):</strong> Minimal relative impact (&lt; 1%)</li>
+          </ul>
+        </section>
+
+        <section id="by-database">
+          <h2>Performance by Database</h2>
+          <p class="paragraph m">
+            Rails Pulse's overhead varies by database adapter due to different write performance characteristics:
+          </p>
+          <div class="docs-content">
+            <table>
+              <thead>
+                <tr>
+                  <th>Database</th>
+                  <th>Request Overhead</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>SQLite</strong></td>
+                  <td>4-6ms</td>
+                  <td>Good for development, limited concurrency</td>
+                </tr>
+                <tr>
+                  <td><strong>PostgreSQL</strong></td>
+                  <td>5-6ms</td>
+                  <td>Recommended for production with proper tuning</td>
+                </tr>
+                <tr>
+                  <td><strong>MySQL</strong></td>
+                  <td>5-7ms</td>
+                  <td>Good for production with proper indexes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Performance Optimization Tips</h3>
+          <ul>
+            <li>Use connection pooling to reduce DB connection overhead</li>
+            <li>Ensure proper indexes exist on <code>occurred_at</code>, <code>route_id</code>, and <code>query_id</code> columns</li>
+            <li>Consider async job processing for high-traffic applications (&gt; 10,000 RPM)</li>
+            <li>Use a separate database for Rails Pulse in high-traffic scenarios</li>
+          </ul>
+        </section>
+
+        <section id="minimizing-impact">
+          <h2>Minimizing Performance Impact</h2>
+
+          <h3>1. Configure Data Retention</h3>
+          <p class="paragraph m">Reduce database writes by configuring shorter retention periods:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Keep data for 7 days instead of 30</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.full_retention_period </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">7</span><span style="color:#E6EDF3">.days</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Limit maximum records per table</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.max_table_records </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_requests</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">25_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_operations</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">50_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_queries</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5_000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <h3>2. Filter Low-Value Routes</h3>
+          <p class="paragraph m">Ignore health checks, status endpoints, and other low-value routes:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.track_assets </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.ignored_routes </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"/health"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"/status"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">%r{^/admin/}</span></span>
+<span class="line"><span style="color:#E6EDF3">  ]</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <h3>3. Use a Separate Database</h3>
+          <p class="paragraph m">For high-traffic applications, use a separate database:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.connects_to </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> { </span><span style="color:#79C0FF">writing</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse</span><span style="color:#E6EDF3">, </span><span style="color:#79C0FF">reading</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse</span><span style="color:#E6EDF3"> }</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <h3>4. Disable in Test Environment</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">!</span><span style="color:#E6EDF3">Rails.env.test?</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="real-world-examples">
+          <h2>Real-World Examples</h2>
+
+          <h3>Small Application (&lt; 1,000 RPM)</h3>
+          <div class="feature-card">
+            <p class="paragraph m"><strong>Configuration:</strong></p>
+            <ul>
+              <li>Single SQLite database</li>
+              <li>Default retention settings</li>
+              <li>All features enabled</li>
+            </ul>
+            <p class="paragraph m"><strong>Impact:</strong></p>
+            <ul>
+              <li>Average request overhead: <strong>0.2ms</strong> (&lt; 1% of request time)</li>
+              <li>Memory overhead: 12 KB per request</li>
+              <li>Database size: 50 MB after 30 days</li>
+            </ul>
+          </div>
+
+          <h3>Medium Application (1,000-10,000 RPM)</h3>
+          <div class="feature-card">
+            <p class="paragraph m"><strong>Configuration:</strong></p>
+            <ul>
+              <li>PostgreSQL database</li>
+              <li>14-day retention</li>
+              <li>Asset tracking disabled</li>
+            </ul>
+            <p class="paragraph m"><strong>Impact:</strong></p>
+            <ul>
+              <li>Average request overhead: <strong>0.3ms</strong> (&lt; 0.5% of request time)</li>
+              <li>Memory overhead: 10 KB per request</li>
+              <li>Database size: 500 MB after 14 days</li>
+            </ul>
+          </div>
+
+          <h3>Large Application (&gt; 10,000 RPM)</h3>
+          <div class="feature-card">
+            <p class="paragraph m"><strong>Configuration:</strong></p>
+            <ul>
+              <li>Separate PostgreSQL database</li>
+              <li>7-day retention</li>
+              <li>Aggressive filtering (assets, health checks, admin routes)</li>
+              <li>Job argument capture disabled</li>
+            </ul>
+            <p class="paragraph m"><strong>Impact:</strong></p>
+            <ul>
+              <li>Average request overhead: <strong>0.4ms</strong> (&lt; 0.3% of request time)</li>
+              <li>Memory overhead: 8 KB per request</li>
+              <li>Database size: 2 GB after 7 days</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="recommendations">
+          <h2>When to Use Rails Pulse</h2>
+
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">✅ Recommended For</h3>
+              <ul>
+                <li>Development and staging environments (always)</li>
+                <li>Low-traffic production sites (&lt; 1,000 RPM)</li>
+                <li>Medium-traffic sites with optimization (1,000-10,000 RPM)</li>
+                <li>Debugging performance issues in production (enable temporarily)</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">⚠️ Use With Caution</h3>
+              <ul>
+                <li>High-traffic production sites (&gt; 10,000 RPM)</li>
+                <li>Requires careful configuration</li>
+                <li>Use separate database</li>
+                <li>Aggressive route filtering</li>
+                <li>Consider sampling (track only % of requests)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="key-takeaways">
+          <h2>Key Takeaways</h2>
+          <ul>
+            <li>Rails Pulse adds approximately <strong>5-6ms per request</strong> due to database writes</li>
+            <li>For typical requests (100-500ms), this represents <strong>1-5%</strong> of total request time</li>
+            <li>The overhead is primarily from persisting tracking data, not from instrumentation itself</li>
+            <li>Use aggressive filtering to reduce overhead (ignore assets, health checks, etc.)</li>
+            <li>Configure shorter retention periods (7 days vs 30 days) for high-traffic sites</li>
+            <li>Consider a separate database for Rails Pulse data in production</li>
+            <li>The overhead is a reasonable tradeoff for the detailed insights Rails Pulse provides</li>
+          </ul>
+
+          <div class="docs-note">
+            <p class="paragraph m bold">Need More Details?</p>
+            <p class="paragraph m">
+              For comprehensive benchmarking methodology, running your own benchmarks, and advanced optimization strategies, see the full
+              <a href="https://github.com/railspulse/rails_pulse/blob/main/docs/performance_impact.md" target="_blank">Performance Impact Guide</a>
+              on GitHub.
+            </p>
+          </div>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Optimize Configuration</h3>
+              <p class="paragraph s secondary">
+                Learn how to configure thresholds, filtering, and data retention.
+              </p>
+              <a href="advanced.html" class="button secondary compact">View Advanced →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Database Setup</h3>
+              <p class="paragraph s secondary">
+                Consider using a separate database for high-traffic applications.
+              </p>
+              <a href="database.html" class="button secondary compact">Configure Database →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

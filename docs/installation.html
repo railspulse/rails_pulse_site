@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Installation - Rails Pulse Documentation</title>
+  <meta content="Installation guide for Rails Pulse - Performance monitoring and debugging for Rails applications" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Rails Pulse" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Installation - Rails Pulse Documentation" />
+  <meta property="og:description" content="Get started with Rails Pulse - comprehensive performance monitoring and debugging for Rails applications" />
+  <meta property="og:url" content="https://railspulse.com/docs/installation.html" />
+  <meta property="og:image" content="https://railspulse.com/images/social-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="../images/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="../images/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="../images/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="../images/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="../images/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="../images/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="../images/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../images/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="../images/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link active">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Installation</h1>
+            <p class="paragraph m secondary">
+              Get started with Rails Pulse in minutes. This guide walks you through installation, basic setup, and configuration.
+            </p>
+          </div>
+        </section>
+
+        <section id="requirements">
+          <h2>Requirements</h2>
+          <p class="paragraph m">Rails Pulse requires:</p>
+          <ul>
+            <li><strong>Ruby 3.3+</strong></li>
+            <li><strong>Rails 7.2+</strong></li>
+            <li><strong>Database:</strong> SQLite, PostgreSQL, or MySQL</li>
+          </ul>
+        </section>
+
+        <section id="installation">
+          <h2>Installation Steps</h2>
+
+          <h3>1. Add the Gem</h3>
+          <p class="paragraph m">Add Rails Pulse to your application's Gemfile:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Gemfile</span></span>
+<span class="line"><span style="color:#FF7B72">gem</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">'rails_pulse'</span></span></code></pre>
+          </div>
+
+          <h3>2. Install the Gem</h3>
+          <p class="paragraph m">Run bundle install:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">bundle install</span></span></code></pre>
+          </div>
+
+          <h3>3. Generate Installation Files</h3>
+          <p class="paragraph m">Generate the Rails Pulse configuration and database files:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Install with single database setup (default - recommended)</span></span>
+<span class="line"><span style="color:#E6EDF3">rails generate rails_pulse:install</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Or install with separate database setup</span></span>
+<span class="line"><span style="color:#E6EDF3">rails generate rails_pulse:install --database=separate</span></span></code></pre>
+          </div>
+
+          <h3>4. Run Migrations</h3>
+          <p class="paragraph m"><strong>For single database setup (default):</strong></p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">rails db:migrate</span></span></code></pre>
+          </div>
+
+          <p class="paragraph m"><strong>For separate database setup:</strong></p>
+          <ol>
+            <li>Configure <code>config/database.yml</code> with your Rails Pulse database settings</li>
+            <li>Run: <code>rails db:prepare</code> to create and load the schema</li>
+          </ol>
+          <p class="paragraph m secondary">
+            See the <a href="database.html">Database</a> documentation for detailed configuration examples.
+          </p>
+
+          <h3>5. Mount the Engine</h3>
+          <p class="paragraph m">Add the Rails Pulse route to your application:</p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/routes.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">Rails.application.routes.draw </span><span style="color:#FF7B72">do</span></span>
+<span class="line"><span style="color:#E6EDF3">  mount RailsPulse::Engine </span><span style="color:#FF7B72">=&gt;</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"/rails_pulse"</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="quick-setup">
+          <h2>Quick Setup</h2>
+          <p class="paragraph m">
+            Rails Pulse automatically starts collecting performance data once installed. Access your monitoring dashboard at:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">http://localhost:3000/rails_pulse</span></span></code></pre>
+          </div>
+
+          <div class="docs-note">
+            <p class="paragraph m bold">Database Setup Options</p>
+            <p class="paragraph m">
+              <strong>Single Database (default):</strong> Rails Pulse tables are created in your main database - no additional configuration needed.
+            </p>
+            <p class="paragraph m">
+              <strong>Separate Database:</strong> See the <a href="database.html">Database</a> section for setup instructions.
+            </p>
+          </div>
+        </section>
+
+        <section id="background-jobs">
+          <h2>Schedule Background Jobs</h2>
+          <p class="paragraph m">
+            Rails Pulse uses two background jobs to maintain performance data. Schedule them using your preferred job scheduler (cron, whenever, solid_queue, etc.):
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Schedule to run 5 minutes past every hour</span></span>
+<span class="line"><span style="color:#8B949E"># cron: 5 * * * *</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse::SummaryJob.perform_later</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Schedule to run daily</span></span>
+<span class="line"><span style="color:#8B949E"># cron: 0 1 * * *</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse::CleanupJob.perform_later</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="basic-configuration">
+          <h2>Basic Configuration</h2>
+          <p class="paragraph m">
+            The installation generator creates <code>config/initializers/rails_pulse.rb</code> with sensible defaults. Here are some common configuration options:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Enable or disable Rails Pulse</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Set performance thresholds (in milliseconds)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.request_thresholds </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">700</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">very_slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">2000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">critical</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">4000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Track background jobs</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.track_jobs </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Enable automatic cleanup</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.archiving_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+          <p class="paragraph m secondary">
+            For complete configuration options, see the <a href="advanced.html">Advanced Configuration</a> documentation.
+          </p>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Explore Features</h3>
+              <p class="paragraph s secondary">
+                Learn about the dashboard, SQL tracking, background job monitoring, and more.
+              </p>
+              <a href="features.html" class="button secondary compact">View Features →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Secure Your Dashboard</h3>
+              <p class="paragraph s secondary">
+                Set up authentication to protect access to your monitoring dashboard.
+              </p>
+              <a href="authentication.html" class="button secondary compact">Setup Authentication →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile Sidebar Toggle -->
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

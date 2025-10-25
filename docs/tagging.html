@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Tagging System - Rails Pulse Documentation</title>
+  <meta content="Organize and filter performance data with Rails Pulse's flexible tagging system" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link active">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Tagging System</h1>
+            <p class="paragraph m secondary">
+              Organize and filter your performance data with custom tags
+            </p>
+          </div>
+        </section>
+
+        <section id="overview">
+          <h2>Overview</h2>
+          <p>
+            Rails Pulse includes a flexible tagging system that allows you to categorize and organize your performance data. Tag routes, requests, queries, jobs, and job runs with custom labels to better organize and filter your monitoring data.
+          </p>
+          <p>
+            Tags help you:
+          </p>
+          <ul role="list">
+            <li><strong>Organize data</strong> by environment, priority, team, or any custom category</li>
+            <li><strong>Filter quickly</strong> to find specific issues or patterns</li>
+            <li><strong>Track progress</strong> by marking items as "investigating" or "resolved"</li>
+            <li><strong>Collaborate</strong> by categorizing work across teams</li>
+            <li><strong>Visualize patterns</strong> with color-coded tag badges throughout the dashboard</li>
+          </ul>
+        </section>
+
+        <section id="configuring-tags">
+          <h2>Configuring Tags</h2>
+          <p>
+            Define available tags in your Rails Pulse initializer. Tags are shared across all record types (routes, requests, queries, jobs, and job runs).
+          </p>
+
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">config/initializers/rails_pulse.rb</div>
+            </div>
+            <pre><code>RailsPulse.configure do |config|
+  config.tags = [
+    "production",
+    "staging",
+    "critical",
+    "needs-optimization",
+    "high-traffic",
+    "background-job"
+  ]
+end</code></pre>
+          </div>
+
+          <p class="paragraph s secondary margin-top-m">
+            <strong>Note:</strong> After adding or modifying tags, restart your Rails server for changes to take effect.
+          </p>
+        </section>
+
+        <section id="using-tags">
+          <h2>Using Tags</h2>
+
+          <h3>Tagging from the UI</h3>
+          <p>
+            You can tag any route, request, query, job, or job run directly from the Rails Pulse dashboard:
+          </p>
+          <ol role="list">
+            <li>Navigate to any route, request, query, job, or job run detail page</li>
+            <li>Click the <strong>"+ tag"</strong> button next to the record</li>
+            <li>Select from your configured tags in the dropdown</li>
+            <li>Remove tags by clicking the <strong>×</strong> button on any tag badge</li>
+          </ol>
+
+          <h3>Programmatic Tagging</h3>
+          <p>
+            You can also manage tags programmatically using the Rails console or in your application code:
+          </p>
+
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">Rails Console</div>
+            </div>
+            <pre><code># Tag a route
+route = RailsPulse::Route.find_by(path: "/api/users")
+route.add_tag("critical")
+route.add_tag("high-traffic")
+
+# Tag a query
+query = RailsPulse::Query.find_by(normalized_sql: "SELECT * FROM users WHERE id = ?")
+query.add_tag("needs-optimization")
+
+# Tag a job
+job = RailsPulse::Job.find_by(name: "UserNotificationJob")
+job.add_tag("high-priority")
+job.add_tag("user-facing")
+
+# Tag a specific job run
+job_run = RailsPulse::JobRun.find_by(run_id: "abc123")
+job_run.add_tag("investigated")
+
+# Remove a tag
+route.remove_tag("critical")
+
+# Check if has tag
+route.has_tag?("production") # => true
+
+# Get all tags for a record
+route.tag_list # => ["high-traffic"]</code></pre>
+          </div>
+        </section>
+
+        <section id="filtering-by-tags">
+          <h2>Filtering by Tags</h2>
+          <p>
+            Use the global filters modal to filter performance data by tags throughout the dashboard:
+          </p>
+          <ol role="list">
+            <li>Click the <strong>filter icon</strong> in the top navigation</li>
+            <li>Select one or more tags from the tag selector</li>
+            <li>Apply filters to see only records with those tags</li>
+            <li>Clear filters to return to the full data view</li>
+          </ol>
+          <p>
+            Tags appear as color-coded badges in all data tables for quick visual identification. You can combine multiple filters to narrow down your search.
+          </p>
+        </section>
+
+        <section id="tagging-strategies">
+          <h2>Common Tagging Strategies</h2>
+          <p>
+            Here are some proven strategies for organizing your performance data with tags:
+          </p>
+
+          <h3>By Environment</h3>
+          <div class="card-code-block">
+            <pre><code>config.tags = ["production", "staging", "development"]</code></pre>
+          </div>
+          <p class="paragraph s secondary">
+            Useful for tracking issues specific to certain environments, especially when using the same Rails Pulse instance across multiple environments.
+          </p>
+
+          <h3>By Priority</h3>
+          <div class="card-code-block">
+            <pre><code>config.tags = ["critical", "high", "medium", "low"]</code></pre>
+          </div>
+          <p class="paragraph s secondary">
+            Helps prioritize performance issues and focus on the most impactful optimizations first.
+          </p>
+
+          <h3>By Status</h3>
+          <div class="card-code-block">
+            <pre><code>config.tags = ["needs-optimization", "investigating", "resolved", "monitoring"]</code></pre>
+          </div>
+          <p class="paragraph s secondary">
+            Track the lifecycle of performance issues from discovery through resolution.
+          </p>
+
+          <h3>By Type</h3>
+          <div class="card-code-block">
+            <pre><code>config.tags = ["api", "background-job", "user-facing", "admin", "internal"]</code></pre>
+          </div>
+          <p class="paragraph s secondary">
+            Categorize endpoints and jobs by their function or audience.
+          </p>
+
+          <h3>By Team</h3>
+          <div class="card-code-block">
+            <pre><code>config.tags = ["team-frontend", "team-backend", "team-data", "team-mobile"]</code></pre>
+          </div>
+          <p class="paragraph s secondary">
+            In larger organizations, assign ownership of routes and jobs to specific teams.
+          </p>
+
+          <h3>Combined Strategy</h3>
+          <p>
+            For maximum flexibility, combine multiple strategies:
+          </p>
+          <div class="card-code-block">
+            <pre><code>config.tags = [
+  # Environment
+  "production", "staging",
+
+  # Priority
+  "critical", "high", "medium", "low",
+
+  # Status
+  "needs-optimization", "investigating", "resolved",
+
+  # Type
+  "api", "background-job", "user-facing", "admin",
+
+  # Team
+  "team-frontend", "team-backend", "team-data"
+]</code></pre>
+          </div>
+        </section>
+
+        <section id="best-practices">
+          <h2>Best Practices</h2>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Keep Tags Concise</h3>
+            <p>
+              Use short, descriptive names (1-3 words) that are easy to scan in the UI. Avoid lengthy descriptions.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Establish Conventions</h3>
+            <p>
+              Document your tagging strategy and naming conventions for your team. Consistency makes tags more useful.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Don't Over-Tag</h3>
+            <p>
+              Start with 10-15 essential tags. Too many tags can make filtering overwhelming. Add more as needed.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Use Tags for Actions</h3>
+            <p>
+              Tags like "needs-optimization" or "investigating" indicate actionable items, making it easy to track TODOs.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Clean Up Obsolete Tags</h3>
+            <p>
+              Periodically review and remove tags that are no longer relevant. Remove unused tags from the configuration.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Tag Early</h3>
+            <p>
+              Tag routes and jobs as soon as you identify patterns or issues. This builds a valuable knowledge base over time.
+            </p>
+          </div>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Advanced Configuration</h3>
+              <p class="paragraph s secondary">
+                Explore performance thresholds, filtering, and data cleanup options.
+              </p>
+              <a href="advanced.html" class="button secondary compact">Advanced Settings →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Performance Impact</h3>
+              <p class="paragraph s secondary">
+                Learn about Rails Pulse's performance overhead and optimization strategies.
+              </p>
+              <a href="performance.html" class="button secondary compact">Performance Guide →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>
