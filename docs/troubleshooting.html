@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Troubleshooting - Rails Pulse Documentation</title>
+  <meta content="Common issues and solutions for Rails Pulse performance monitoring" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link active">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Troubleshooting</h1>
+            <p class="paragraph m secondary">
+              Common issues and solutions for Rails Pulse
+            </p>
+          </div>
+        </section>
+
+        <section id="installation-issues">
+          <h2>Installation Issues</h2>
+
+          <h3>Rails Pulse Not Detected</h3>
+          <p><strong>Symptom:</strong> Running upgrade generator shows "Rails Pulse installation not detected"</p>
+          <p><strong>Solution:</strong> Run the install generator first:</p>
+          <div class="card-code-block">
+            <pre><code>rails generate rails_pulse:install
+rails db:migrate</code></pre>
+          </div>
+
+          <h3>Migration Already Exists Error</h3>
+          <p><strong>Symptom:</strong> Error when running the install generator about existing migration</p>
+          <p><strong>Solution:</strong> Check if the migration already ran:</p>
+          <div class="card-code-block">
+            <pre><code># For single database
+rails db:migrate:status
+
+# For separate database
+rails db:migrate:status:rails_pulse</code></pre>
+          </div>
+          <p>If the migration shows as "up", you're already installed. If "down", run <code>rails db:migrate</code>.</p>
+
+          <h3>Database Already Exists Error</h3>
+          <p><strong>Symptom:</strong> Error during separate database setup about database already existing</p>
+          <p><strong>Solution:</strong> Use <code>db:prepare</code> instead of <code>db:create</code>:</p>
+          <div class="card-code-block">
+            <pre><code>rails db:prepare</code></pre>
+          </div>
+          <p>This command safely creates the database if it doesn't exist, or loads the schema if it does.</p>
+
+          <h3>Missing Columns After Gem Update</h3>
+          <p><strong>Symptom:</strong> Errors about missing columns after updating the Rails Pulse gem</p>
+          <p><strong>Solution:</strong> Run the upgrade generator to detect and add missing columns:</p>
+          <div class="card-code-block">
+            <pre><code>rails generate rails_pulse:upgrade
+rails db:migrate</code></pre>
+          </div>
+        </section>
+
+        <section id="dashboard-issues">
+          <h2>Dashboard Issues</h2>
+
+          <h3>Dashboard Not Loading / 404 Error</h3>
+          <p><strong>Symptom:</strong> Visiting /rails_pulse shows 404 or routing error</p>
+          <p><strong>Solution:</strong> Ensure Rails Pulse is mounted in your routes:</p>
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">config/routes.rb</div>
+            </div>
+            <pre><code>Rails.application.routes.draw do
+  mount RailsPulse::Engine => "/rails_pulse"
+end</code></pre>
+          </div>
+          <p>Restart your Rails server after adding the route.</p>
+
+          <h3>Dashboard Shows No Data</h3>
+          <p><strong>Symptom:</strong> Dashboard loads but shows empty charts and tables</p>
+          <p><strong>Possible causes and solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Rails Pulse is disabled</strong> - Check your initializer:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.enabled = true  # Make sure this is true
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>No traffic yet</strong> - Generate some requests to your application, then check the dashboard again
+            </li>
+            <li>
+              <strong>Wrong database connection</strong> - If using separate database, verify <code>connects_to</code> configuration matches your database.yml
+            </li>
+            <li>
+              <strong>Data retention period expired</strong> - Check if cleanup removed all data. Adjust retention period:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.full_retention_period = 30.days  # Increase if needed
+end</code></pre>
+              </div>
+            </li>
+          </ol>
+
+          <h3>Charts Not Rendering</h3>
+          <p><strong>Symptom:</strong> Dashboard loads but charts are missing or broken</p>
+          <p><strong>Solution:</strong> This is typically a JavaScript error. Check your browser console for errors and ensure:</p>
+          <ul role="list">
+            <li>Your Content Security Policy (CSP) allows Rails Pulse assets</li>
+            <li>No JavaScript conflicts with other gems or libraries</li>
+            <li>Rails Pulse assets are properly compiled (if using asset pipeline)</li>
+          </ul>
+        </section>
+
+        <section id="tracking-issues">
+          <h2>Tracking Issues</h2>
+
+          <h3>Requests Not Being Tracked</h3>
+          <p><strong>Symptom:</strong> Some or all requests aren't appearing in Rails Pulse</p>
+          <p><strong>Possible causes and solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Routes are ignored</strong> - Check ignored routes configuration:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.ignored_routes = []  # Check if routes are excluded
+  config.track_assets = false  # Asset requests ignored by default
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Custom mount path not configured</strong> - If Rails Pulse is mounted at a custom path:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.mount_path = "/admin/monitoring"  # Prevents self-tracking
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Middleware not loaded</strong> - Restart your Rails server to ensure middleware is active
+            </li>
+          </ol>
+
+          <h3>Background Jobs Not Being Tracked</h3>
+          <p><strong>Symptom:</strong> Jobs page shows no data despite running background jobs</p>
+          <p><strong>Possible causes and solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Job tracking disabled</strong> - Check configuration:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.track_jobs = true  # Make sure this is true
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Jobs or queues are ignored</strong> - Check ignored configuration:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.ignored_jobs = []    # Check if job class is excluded
+  config.ignored_queues = []  # Check if queue is excluded
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Job workers need restart</strong> - Restart your background job workers (Sidekiq, Solid Queue, etc.)
+            </li>
+          </ol>
+
+          <h3>SQL Queries Not Showing</h3>
+          <p><strong>Symptom:</strong> Request details don't show SQL queries</p>
+          <p><strong>Possible causes and solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Queries are ignored</strong> - Check ignored queries configuration:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.ignored_queries = []  # Check if queries are excluded
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>No database queries in request</strong> - Some requests (redirects, static files) may not execute queries
+            </li>
+          </ol>
+        </section>
+
+        <section id="performance-issues">
+          <h2>Performance Issues</h2>
+
+          <h3>Application Slowdown After Installing</h3>
+          <p><strong>Symptom:</strong> Noticeable performance degradation after adding Rails Pulse</p>
+          <p><strong>Solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Use aggressive filtering</strong> for high-traffic applications:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  # Ignore low-value routes
+  config.ignored_routes = [/^\/assets/, /^\/health/]
+  config.track_assets = false
+
+  # Disable job argument capture
+  config.capture_job_arguments = false
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Use a separate database</strong> to isolate monitoring overhead - see <a href="database.html">Database documentation</a>
+            </li>
+            <li>
+              <strong>Reduce data retention</strong> to keep tables smaller:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.full_retention_period = 7.days  # Shorter retention
+  config.max_table_records = {
+    rails_pulse_requests: 5_000,
+    rails_pulse_operations: 25_000,
+    rails_pulse_queries: 2_000
+  }
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Disable in production</strong> if overhead is unacceptable:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.enabled = Rails.env.development? || Rails.env.staging?
+end</code></pre>
+              </div>
+            </li>
+          </ol>
+          <p>See the <a href="performance.html">Performance Impact Guide</a> for detailed optimization strategies.</p>
+
+          <h3>Database Growing Too Large</h3>
+          <p><strong>Symptom:</strong> Rails Pulse tables consuming excessive disk space</p>
+          <p><strong>Solutions:</strong></p>
+          <ol role="list">
+            <li>
+              <strong>Enable and configure cleanup</strong>:
+              <div class="card-code-block margin-top-s">
+                <pre><code>RailsPulse.configure do |config|
+  config.archiving_enabled = true
+  config.full_retention_period = 7.days  # Adjust as needed
+end</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Schedule cleanup job</strong> to run daily:
+              <div class="card-code-block margin-top-s">
+                <pre><code># In your job scheduler (cron, whenever, etc.)
+RailsPulse::CleanupJob.perform_later</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Run manual cleanup</strong>:
+              <div class="card-code-block margin-top-s">
+                <pre><code>rails rails_pulse:cleanup</code></pre>
+              </div>
+            </li>
+            <li>
+              <strong>Check current database status</strong>:
+              <div class="card-code-block margin-top-s">
+                <pre><code>rails rails_pulse:cleanup_stats</code></pre>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section id="authentication-issues">
+          <h2>Authentication Issues</h2>
+
+          <h3>Authentication Not Working</h3>
+          <p><strong>Symptom:</strong> Dashboard is accessible without authentication despite configuration</p>
+          <p><strong>Solution:</strong> Ensure authentication is properly configured:</p>
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">config/initializers/rails_pulse.rb</div>
+            </div>
+            <pre><code>RailsPulse.configure do |config|
+  config.authentication_enabled = true  # Must be true
+
+  config.authentication_method = proc {
+    # Your authentication logic must be in this proc
+    unless user_signed_in? && current_user.admin?
+      redirect_to main_app.root_path, alert: "Access denied"
+    end
+  }
+end</code></pre>
+          </div>
+          <p>Restart your server after changing authentication configuration.</p>
+
+          <h3>Redirect Loop with Authentication</h3>
+          <p><strong>Symptom:</strong> Browser shows too many redirects error</p>
+          <p><strong>Solution:</strong> Make sure your authentication redirect doesn't point back to Rails Pulse:</p>
+          <div class="card-code-block">
+            <pre><code>RailsPulse.configure do |config|
+  # Don't redirect to /rails_pulse or you'll create a loop
+  config.authentication_redirect_path = "/login"  # Not "/rails_pulse"
+end</code></pre>
+          </div>
+
+          <h3>Current User Not Available</h3>
+          <p><strong>Symptom:</strong> Error about undefined method <code>current_user</code></p>
+          <p><strong>Solution:</strong> Access your authentication helpers through the main app:</p>
+          <div class="card-code-block">
+            <pre><code>RailsPulse.configure do |config|
+  config.authentication_method = proc {
+    # For Devise or similar
+    unless send(:user_signed_in?) && send(:current_user)&.admin?
+      redirect_to main_app.root_path
+    end
+  }
+end</code></pre>
+          </div>
+          <p>See the <a href="authentication.html">Authentication documentation</a> for more examples.</p>
+        </section>
+
+        <section id="database-configuration">
+          <h2>Database Configuration Issues</h2>
+
+          <h3>Separate Database Not Connecting</h3>
+          <p><strong>Symptom:</strong> Errors about database connection when using separate database</p>
+          <p><strong>Solution:</strong> Verify your configuration matches between initializer and database.yml:</p>
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">config/initializers/rails_pulse.rb</div>
+            </div>
+            <pre><code>RailsPulse.configure do |config|
+  config.connects_to = {
+    database: { writing: :rails_pulse, reading: :rails_pulse }
+  }
+  # ↑ This name must match the key in database.yml ↓
+end</code></pre>
+          </div>
+          <div class="card-code-block margin-top-m">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">config/database.yml</div>
+            </div>
+            <pre><code>production:
+  # ... your main database ...
+
+  rails_pulse:  # ← Must match the name in connects_to
+    adapter: postgresql
+    database: myapp_rails_pulse_production
+    # ... rest of config ...</code></pre>
+          </div>
+
+          <h3>Schema File Missing</h3>
+          <p><strong>Symptom:</strong> Error about missing db/rails_pulse_schema.rb</p>
+          <p><strong>Solution:</strong> Don't delete the schema file - it's the single source of truth. If accidentally deleted, reinstall:</p>
+          <div class="card-code-block">
+            <pre><code>rails generate rails_pulse:install --force</code></pre>
+          </div>
+
+          <h3>Migrations Path Not Found</h3>
+          <p><strong>Symptom:</strong> Rails can't find migrations in db/rails_pulse_migrate</p>
+          <p><strong>Solution:</strong> Ensure migrations_paths is set in database.yml:</p>
+          <div class="card-code-block">
+            <pre><code>production:
+  rails_pulse:
+    adapter: postgresql
+    database: myapp_rails_pulse
+    migrations_paths: db/rails_pulse_migrate  # Required for separate DB</code></pre>
+          </div>
+        </section>
+
+        <section id="getting-help">
+          <h2>Still Having Issues?</h2>
+          <p>If you can't find a solution here, we're happy to help:</p>
+
+          <div class="grid columns-2 gap-l margin-top-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Check FAQ</h3>
+              <p class="paragraph s secondary">
+                Browse frequently asked questions for quick answers.
+              </p>
+              <a href="faq.html" class="button secondary compact">View FAQ →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Report an Issue</h3>
+              <p class="paragraph s secondary">
+                Found a bug? Report it on GitHub Issues.
+              </p>
+              <a href="https://github.com/railspulse/rails_pulse/issues" class="button secondary compact" target="_blank">GitHub Issues →</a>
+            </div>
+          </div>
+
+          <div class="feature-card margin-top-l">
+            <h3 class="color-accent no-top-margin">When Reporting Issues</h3>
+            <p>Help us help you by including:</p>
+            <ul role="list">
+              <li>Rails Pulse version (<code>bundle info rails_pulse</code>)</li>
+              <li>Rails version (<code>rails -v</code>)</li>
+              <li>Ruby version (<code>ruby -v</code>)</li>
+              <li>Database adapter (SQLite, PostgreSQL, MySQL)</li>
+              <li>Error messages and stack traces</li>
+              <li>Relevant configuration from your initializer</li>
+              <li>Steps to reproduce the issue</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

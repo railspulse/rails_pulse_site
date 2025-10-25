@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Testing - Rails Pulse Documentation</title>
+  <meta content="Testing guide for Rails Pulse contributors and developers" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link active">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Testing Guide</h1>
+            <p class="paragraph m secondary">
+              Testing Rails Pulse for contributors and developers
+            </p>
+          </div>
+          <p>
+            This guide is for developers who want to contribute to Rails Pulse or verify their installation. Rails Pulse includes a comprehensive test suite designed for speed and reliability across multiple databases and Rails versions.
+          </p>
+        </section>
+
+        <section id="quick-start">
+          <h2>Quick Start</h2>
+          <p>Run the complete test suite with a single command:</p>
+          <div class="card-code-block">
+            <pre><code># Run all tests (unit, functional, integration, instrumentation)
+rails test:all</code></pre>
+          </div>
+          <p>
+            This runs all test types against the default database (SQLite) and is the fastest way to verify everything works.
+          </p>
+        </section>
+
+        <section id="test-types">
+          <h2>Running Individual Test Types</h2>
+          <p>Rails Pulse organizes tests into logical categories for faster iteration during development:</p>
+
+          <h3>Unit Tests</h3>
+          <p>Test models, helpers, and utility classes:</p>
+          <div class="card-code-block">
+            <pre><code>rails test:unit</code></pre>
+          </div>
+
+          <h3>Functional Tests</h3>
+          <p>Test controllers and views:</p>
+          <div class="card-code-block">
+            <pre><code>rails test:functional</code></pre>
+          </div>
+
+          <h3>Integration Tests</h3>
+          <p>Test end-to-end workflows and feature interactions:</p>
+          <div class="card-code-block">
+            <pre><code>rails test:integration</code></pre>
+          </div>
+
+          <h3>Individual Test Files</h3>
+          <p>Run a specific test file during development:</p>
+          <div class="card-code-block">
+            <pre><code>rails test test/models/rails_pulse/request_test.rb</code></pre>
+          </div>
+        </section>
+
+        <section id="multi-database">
+          <h2>Multi-Database Testing</h2>
+          <p>
+            Rails Pulse supports SQLite, PostgreSQL, and MySQL. Test against all databases to ensure compatibility.
+          </p>
+
+          <h3>Test Matrix (All Combinations)</h3>
+          <p>Run tests against all database and Rails version combinations locally:</p>
+          <div class="card-code-block">
+            <pre><code># Test all database and Rails version combinations
+rails test:matrix</code></pre>
+          </div>
+          <p>This tests:</p>
+          <ul role="list">
+            <li><strong>Databases:</strong> SQLite3, PostgreSQL, MySQL2 (local testing only)</li>
+            <li><strong>Rails versions:</strong> 7.2, 8.0</li>
+          </ul>
+          <p class="paragraph s secondary">
+            <strong>Note:</strong> CI only tests SQLite3 + PostgreSQL for reliability. MySQL is available for local testing but excluded from CI.
+          </p>
+
+          <h3>Individual Database Testing</h3>
+          <p>Test with a specific database:</p>
+          <div class="card-code-block">
+            <pre><code># Test with SQLite (default)
+rails test:all
+
+# Test with PostgreSQL
+DB=postgresql FORCE_DB_CONFIG=true rails test:all
+
+# Test with MySQL (local only)
+DB=mysql2 FORCE_DB_CONFIG=true rails test:all</code></pre>
+          </div>
+        </section>
+
+        <section id="environment-setup">
+          <h2>Development Environment Setup</h2>
+          <p>
+            To run multi-database tests locally, you'll need to configure PostgreSQL and optionally MySQL.
+          </p>
+
+          <h3>1. Copy Environment Template</h3>
+          <div class="card-code-block">
+            <pre><code>cp .env.example .env</code></pre>
+          </div>
+
+          <h3>2. Configure Database Credentials</h3>
+          <p>Edit <code>.env</code> with your database credentials:</p>
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">.env</div>
+            </div>
+            <pre><code># PostgreSQL Configuration (used in CI + local)
+POSTGRES_USERNAME=your_username
+POSTGRES_PASSWORD=your_password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+
+# MySQL Configuration (local testing only)
+MYSQL_USERNAME=root
+MYSQL_PASSWORD=your_password
+MYSQL_HOST=localhost
+MYSQL_PORT=3306</code></pre>
+          </div>
+
+          <h3>3. Create Test Databases</h3>
+          <div class="card-code-block">
+            <pre><code># PostgreSQL
+createdb rails_pulse_test
+
+# MySQL
+mysql -u root -p -e "CREATE DATABASE rails_pulse_test;"</code></pre>
+          </div>
+
+          <h3>4. Verify Setup</h3>
+          <p>Test that each database connection works:</p>
+          <div class="card-code-block">
+            <pre><code># SQLite (should always work)
+rails test:all
+
+# PostgreSQL
+DB=postgresql FORCE_DB_CONFIG=true rails test:all
+
+# MySQL
+DB=mysql2 FORCE_DB_CONFIG=true rails test:all</code></pre>
+          </div>
+        </section>
+
+        <section id="ci-testing">
+          <h2>CI Testing</h2>
+          <p>
+            Rails Pulse uses GitHub Actions for continuous integration. The CI pipeline automatically tests multiple configurations to catch compatibility issues early.
+          </p>
+
+          <h3>What CI Tests</h3>
+          <ul role="list">
+            <li><strong>Databases:</strong> SQLite3 (in-memory), PostgreSQL (service)</li>
+            <li><strong>Rails versions:</strong> 7.2, 8.0</li>
+            <li><strong>Test types:</strong> Unit, functional, integration, system</li>
+          </ul>
+
+          <h3>Local vs CI Differences</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Aspect</th>
+                <th>Local Testing</th>
+                <th>CI Testing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Databases</strong></td>
+                <td>SQLite3, PostgreSQL, MySQL2</td>
+                <td>SQLite3, PostgreSQL only</td>
+              </tr>
+              <tr>
+                <td><strong>MySQL Support</strong></td>
+                <td>Available for testing</td>
+                <td>Excluded (reliability issues)</td>
+              </tr>
+              <tr>
+                <td><strong>SQLite Mode</strong></td>
+                <td>File-based</td>
+                <td>In-memory (faster)</td>
+              </tr>
+              <tr>
+                <td><strong>Database Switching</strong></td>
+                <td>Requires <code>FORCE_DB_CONFIG=true</code></td>
+                <td>Automatic per job</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Why MySQL is Excluded from CI</h3>
+          <p>
+            MySQL tests work locally but are excluded from CI due to service flakiness in GitHub Actions. Rails Pulse fully supports MySQL in production - the exclusion is purely for CI reliability.
+          </p>
+        </section>
+
+        <section id="benchmarking">
+          <h2>Performance Benchmarking</h2>
+          <p>
+            Rails Pulse includes built-in benchmarking tools to measure performance impact. These are useful for contributors working on performance optimizations.
+          </p>
+
+          <h3>Setup</h3>
+          <p>Add benchmarking gems to your Gemfile:</p>
+          <div class="card-code-block">
+            <div class="card-code-block-header">
+              <div class="paragraph s secondary">Gemfile</div>
+            </div>
+            <pre><code>group :development, :test do
+  gem 'benchmark-ips'
+  gem 'memory_profiler'
+end</code></pre>
+          </div>
+          <div class="card-code-block margin-top-m">
+            <pre><code>bundle install</code></pre>
+          </div>
+
+          <h3>Run All Benchmarks</h3>
+          <div class="card-code-block">
+            <pre><code>bundle exec rake rails_pulse:benchmark:all</code></pre>
+          </div>
+
+          <h3>Run Specific Benchmarks</h3>
+          <div class="card-code-block">
+            <pre><code># Memory usage analysis
+bundle exec rake rails_pulse:benchmark:memory
+
+# Request overhead measurement
+bundle exec rake rails_pulse:benchmark:request_overhead
+
+# Middleware performance
+bundle exec rake rails_pulse:benchmark:middleware</code></pre>
+          </div>
+
+          <p>
+            See the <a href="performance.html">Performance Impact Guide</a> for detailed information on interpreting benchmark results and optimization strategies.
+          </p>
+        </section>
+
+        <section id="best-practices">
+          <h2>Testing Best Practices</h2>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Run Tests Before Committing</h3>
+            <p>
+              Always run <code>rails test:all</code> before pushing changes to catch regressions early.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Test Against Multiple Databases</h3>
+            <p>
+              If your changes affect database queries or migrations, test with PostgreSQL and MySQL in addition to SQLite.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Use Test:Matrix for Major Changes</h3>
+            <p>
+              Before releasing or making significant changes, run <code>rails test:matrix</code> to test all combinations.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Keep Tests Fast</h3>
+            <p>
+              Use factories and fixtures efficiently. Fast tests encourage frequent testing during development.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Write Tests for Bug Fixes</h3>
+            <p>
+              When fixing a bug, write a failing test first to verify the fix and prevent regressions.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <h3 class="color-accent no-top-margin">Check CI Results</h3>
+            <p>
+              Even if tests pass locally, always check CI results before merging. CI may catch environment-specific issues.
+            </p>
+          </div>
+        </section>
+
+        <section id="troubleshooting-tests">
+          <h2>Troubleshooting Test Failures</h2>
+
+          <h3>Database Connection Errors</h3>
+          <p><strong>Problem:</strong> Tests fail with database connection errors</p>
+          <p><strong>Solution:</strong> Ensure your <code>.env</code> file has correct credentials and databases exist:</p>
+          <div class="card-code-block">
+            <pre><code># PostgreSQL
+createdb rails_pulse_test
+
+# MySQL
+mysql -u root -p -e "CREATE DATABASE rails_pulse_test;"</code></pre>
+          </div>
+
+          <h3>Random Test Failures</h3>
+          <p><strong>Problem:</strong> Tests pass individually but fail when run together</p>
+          <p><strong>Solution:</strong> This usually indicates shared state or improper cleanup. Check for:</p>
+          <ul role="list">
+            <li>Missing database rollback in tests</li>
+            <li>Global state not being reset between tests</li>
+            <li>Test order dependencies</li>
+          </ul>
+
+          <h3>MySQL-Specific Failures</h3>
+          <p><strong>Problem:</strong> Tests pass with SQLite/PostgreSQL but fail with MySQL</p>
+          <p><strong>Solution:</strong> MySQL has stricter SQL requirements. Common issues:</p>
+          <ul role="list">
+            <li>Case sensitivity in table/column names</li>
+            <li>Different default values for columns</li>
+            <li>Stricter datetime handling</li>
+          </ul>
+
+          <h3>Slow Test Runs</h3>
+          <p><strong>Problem:</strong> Tests take too long to run</p>
+          <p><strong>Solutions:</strong></p>
+          <ul role="list">
+            <li>Run specific test files during development instead of full suite</li>
+            <li>Use SQLite for fastest iteration (file-based, no server)</li>
+            <li>Consider using parallel testing: <code>rails test:all -- --parallel</code></li>
+          </ul>
+        </section>
+
+        <section id="contributing">
+          <h2>Contributing Tests</h2>
+          <p>
+            When contributing to Rails Pulse, well-tested code is essential. Here's what we look for:
+          </p>
+
+          <h3>Test Coverage</h3>
+          <ul role="list">
+            <li>New features should include tests for happy paths and edge cases</li>
+            <li>Bug fixes should include regression tests</li>
+            <li>Aim for meaningful coverage, not just high percentages</li>
+          </ul>
+
+          <h3>Test Quality</h3>
+          <ul role="list">
+            <li>Tests should be readable and maintainable</li>
+            <li>Use descriptive test names that explain what's being tested</li>
+            <li>One assertion per test when possible</li>
+            <li>Avoid brittle tests that break on minor changes</li>
+          </ul>
+
+          <h3>Running Pre-Release Tests</h3>
+          <p>Before releasing, maintainers run comprehensive validation:</p>
+          <div class="card-code-block">
+            <pre><code>rake test_release</code></pre>
+          </div>
+          <p>This validates:</p>
+          <ul role="list">
+            <li>Git status (clean working directory)</li>
+            <li>Code linting (RuboCop)</li>
+            <li>Asset building</li>
+            <li>Gem building</li>
+            <li>Generator tests</li>
+            <li>Full test matrix (all databases + Rails versions)</li>
+          </ul>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Contributing Guide</h3>
+              <p class="paragraph s secondary">
+                Learn how to contribute code, documentation, and ideas to Rails Pulse.
+              </p>
+              <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="button secondary compact" target="_blank">Contributing →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Performance Impact</h3>
+              <p class="paragraph s secondary">
+                Understand performance benchmarking and optimization strategies.
+              </p>
+              <a href="performance.html" class="button secondary compact">Performance Guide →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

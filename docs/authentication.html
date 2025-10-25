@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Authentication - Rails Pulse Documentation</title>
+  <meta content="Secure your Rails Pulse dashboard with flexible authentication options" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link active">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Authentication</h1>
+            <p class="paragraph m secondary">
+              Rails Pulse supports flexible authentication to secure access to your monitoring dashboard. Works with any authentication system including Devise, custom solutions, and more.
+            </p>
+          </div>
+        </section>
+
+        <section id="authentication-setup">
+          <h2>Authentication Setup</h2>
+          <p class="paragraph m">
+            Enable authentication by configuring the following options in your Rails Pulse initializer:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Enable authentication</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Where to redirect unauthorized users (optional, defaults to "/")</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_redirect_path </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"/login"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Define your authentication logic</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#8B949E"># Your authentication logic here</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="devise-example">
+          <h2>Devise with Admin Role</h2>
+          <p class="paragraph m">
+            The most common authentication pattern uses Devise with an admin role check:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">unless</span><span style="color:#E6EDF3"> user_signed_in? </span><span style="color:#FF7B72">&amp;&amp;</span><span style="color:#E6EDF3"> current_user.admin?</span></span>
+<span class="line"><span style="color:#E6EDF3">      redirect_to main_app.root_path, </span><span style="color:#79C0FF">alert</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"Access denied"</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">end</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+          <p class="paragraph m secondary">
+            This ensures only signed-in admin users can access the Rails Pulse dashboard.
+          </p>
+        </section>
+
+        <section id="custom-auth">
+          <h2>Custom Authorization Logic</h2>
+          <p class="paragraph m">
+            You can implement any custom authorization logic based on your application's needs:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    current_user </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> User.find_by(</span><span style="color:#79C0FF">id</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> session[</span><span style="color:#79C0FF">:user_id</span><span style="color:#E6EDF3">])</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">unless</span><span style="color:#E6EDF3"> current_user</span><span style="color:#FF7B72">&amp;.</span><span style="color:#E6EDF3">can_access_monitoring?</span></span>
+<span class="line"><span style="color:#E6EDF3">      render </span><span style="color:#79C0FF">plain</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"Forbidden"</span><span style="color:#E6EDF3">, </span><span style="color:#79C0FF">status</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:forbidden</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">end</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="ip-restriction">
+          <h2>IP Address Restriction</h2>
+          <p class="paragraph m">
+            Restrict access to specific IP addresses or ranges:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    allowed_ips </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span><span style="color:#A5D6FF">"127.0.0.1"</span><span style="color:#E6EDF3">, </span><span style="color:#A5D6FF">"::1"</span><span style="color:#E6EDF3">, </span><span style="color:#A5D6FF">"10.0.0.0/8"</span><span style="color:#E6EDF3">]</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">unless</span><span style="color:#E6EDF3"> allowed_ips.any? { </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">ip</span><span style="color:#FF7B72">|</span><span style="color:#E6EDF3"> IPAddr.new(ip).include?(request.remote_ip) }</span></span>
+<span class="line"><span style="color:#E6EDF3">      render </span><span style="color:#79C0FF">plain</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"Access denied"</span><span style="color:#E6EDF3">, </span><span style="color:#79C0FF">status</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:forbidden</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">end</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="http-basic-auth">
+          <h2>HTTP Basic Authentication</h2>
+          <p class="paragraph m">
+            For simple authentication, use HTTP Basic Auth:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    authenticate_or_request_with_http_basic </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">username</span><span style="color:#E6EDF3">, </span><span style="color:#FFA657">password</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">      username </span><span style="color:#FF7B72">==</span><span style="color:#E6EDF3"> ENV[</span><span style="color:#A5D6FF">"RAILS_PULSE_USERNAME"</span><span style="color:#E6EDF3">] </span><span style="color:#FF7B72">&amp;&amp;</span></span>
+<span class="line"><span style="color:#E6EDF3">        password </span><span style="color:#FF7B72">==</span><span style="color:#E6EDF3"> ENV[</span><span style="color:#A5D6FF">"RAILS_PULSE_PASSWORD"</span><span style="color:#E6EDF3">]</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">end</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+          <div class="docs-warning">
+            <p class="paragraph m bold">Security Warning</p>
+            <p class="paragraph m">
+              Store credentials in environment variables, never commit them to your repository. Use Rails credentials or a secrets management service in production.
+            </p>
+          </div>
+        </section>
+
+        <section id="environment-based">
+          <h2>Environment-Based Access</h2>
+          <p class="paragraph m">
+            Disable authentication in development, enable it in production:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Only require authentication in production</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> Rails.env.production?</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  config.authentication_method </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">proc</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">unless</span><span style="color:#E6EDF3"> user_signed_in? </span><span style="color:#FF7B72">&amp;&amp;</span><span style="color:#E6EDF3"> current_user.admin?</span></span>
+<span class="line"><span style="color:#E6EDF3">      redirect_to main_app.root_path, </span><span style="color:#79C0FF">alert</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"Access denied"</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#FF7B72">end</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="best-practices">
+          <h2>Best Practices</h2>
+          <ul>
+            <li><strong>Always enable authentication in production</strong> - Performance data can reveal sensitive information about your application</li>
+            <li><strong>Use role-based access control</strong> - Limit dashboard access to administrators or DevOps team members</li>
+            <li><strong>Combine authentication methods</strong> - Use both user authentication and IP restrictions for extra security</li>
+            <li><strong>Log access attempts</strong> - Monitor who accesses the dashboard and when</li>
+            <li><strong>Use environment variables</strong> - Never hardcode credentials in your initializer</li>
+          </ul>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Database Configuration</h3>
+              <p class="paragraph s secondary">
+                Learn about single vs separate database setup options.
+              </p>
+              <a href="database.html" class="button secondary compact">Configure Database →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Advanced Settings</h3>
+              <p class="paragraph s secondary">
+                Customize performance thresholds, tagging, and data retention.
+              </p>
+              <a href="advanced.html" class="button secondary compact">View Advanced →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

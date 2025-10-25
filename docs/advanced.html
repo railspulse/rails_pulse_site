@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Advanced Configuration - Rails Pulse Documentation</title>
+  <meta content="Advanced Rails Pulse configuration including thresholds, tagging, and data management" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link active">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Advanced Configuration</h1>
+            <p class="paragraph m secondary">
+              Customize Rails Pulse with performance thresholds, tagging, filtering, and data management options.
+            </p>
+          </div>
+        </section>
+
+        <section id="performance-thresholds">
+          <h2>Performance Thresholds</h2>
+          <p class="paragraph m">
+            Configure performance thresholds to categorize requests, routes, queries, and jobs:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Route thresholds (in milliseconds)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.route_thresholds </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">500</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">very_slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">1500</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">critical</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">3000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Request thresholds (in milliseconds)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.request_thresholds </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">700</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">very_slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">2000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">critical</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">4000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Query thresholds (in milliseconds)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.query_thresholds </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">100</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">very_slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">500</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">critical</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">1000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Job thresholds (in milliseconds)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.job_thresholds </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5_000</span><span style="color:#E6EDF3">,      </span><span style="color:#8B949E"># 5 seconds</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">very_slow</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">30_000</span><span style="color:#E6EDF3">, </span><span style="color:#8B949E"># 30 seconds</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">critical</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">60_000</span><span style="color:#E6EDF3">   </span><span style="color:#8B949E"># 1 minute</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="filtering">
+          <h2>Filtering & Ignoring</h2>
+          <p class="paragraph m">
+            Exclude specific routes, requests, queries, or jobs from tracking:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Ignore specific routes</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.ignored_routes </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span><span style="color:#A5D6FF">"/health"</span><span style="color:#E6EDF3">, </span><span style="color:#79C0FF">/\A\/api\/internal/</span><span style="color:#E6EDF3">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Ignore asset requests</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.track_assets </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Ignore specific job classes</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.ignored_jobs </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"ActiveStorage::AnalyzeJob"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"ActiveStorage::PurgeJob"</span></span>
+<span class="line"><span style="color:#E6EDF3">  ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Ignore specific queues</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.ignored_queues </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span><span style="color:#A5D6FF">"low_priority"</span><span style="color:#E6EDF3">, </span><span style="color:#A5D6FF">"mailers"</span><span style="color:#E6EDF3">]</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="tagging">
+          <h2>Tagging System</h2>
+          <p class="paragraph m">
+            Organize and categorize performance data with custom tags:
+          </p>
+
+          <h3>Configure Available Tags</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.tags </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> [</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"production"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"staging"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"critical"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"needs-optimization"</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#A5D6FF">"high-traffic"</span></span>
+<span class="line"><span style="color:#E6EDF3">  ]</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <h3>Tag from the UI</h3>
+          <ol>
+            <li>Navigate to any route, request, query, job, or job run detail page</li>
+            <li>Click the "+ tag" button</li>
+            <li>Select from your configured tags</li>
+            <li>Remove tags by clicking the × button</li>
+          </ol>
+
+          <h3>Tag Programmatically</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Tag a route</span></span>
+<span class="line"><span style="color:#E6EDF3">route </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> RailsPulse::Route.find_by(</span><span style="color:#79C0FF">path</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"/api/users"</span><span style="color:#E6EDF3">)</span></span>
+<span class="line"><span style="color:#E6EDF3">route.add_tag(</span><span style="color:#A5D6FF">"critical"</span><span style="color:#E6EDF3">)</span></span>
+<span class="line"><span style="color:#E6EDF3">route.add_tag(</span><span style="color:#A5D6FF">"high-traffic"</span><span style="color:#E6EDF3">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Tag a query</span></span>
+<span class="line"><span style="color:#E6EDF3">query </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> RailsPulse::Query.find_by(</span><span style="color:#79C0FF">normalized_sql</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">"SELECT..."</span><span style="color:#E6EDF3">)</span></span>
+<span class="line"><span style="color:#E6EDF3">query.add_tag(</span><span style="color:#A5D6FF">"needs-optimization"</span><span style="color:#E6EDF3">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Remove a tag</span></span>
+<span class="line"><span style="color:#E6EDF3">route.remove_tag(</span><span style="color:#A5D6FF">"critical"</span><span style="color:#E6EDF3">)</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="data-cleanup">
+          <h2>Data Management & Cleanup</h2>
+          <p class="paragraph m">
+            Prevent database growth with automatic cleanup strategies:
+          </p>
+
+          <h3>Cleanup Configuration</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Enable automatic cleanup</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.archiving_enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Time-based retention (delete records older than this)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.full_retention_period </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">30</span><span style="color:#E6EDF3">.days</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Count-based retention (maximum records per table)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.max_table_records </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_operations</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">100_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_requests</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">50_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_job_runs</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">50_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_queries</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">10_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_routes</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">1_000</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">rails_pulse_jobs</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">1_000</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <h3>Manual Cleanup</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># Run cleanup manually</span></span>
+<span class="line"><span style="color:#E6EDF3">rails rails_pulse:cleanup</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Check database status</span></span>
+<span class="line"><span style="color:#E6EDF3">rails rails_pulse:cleanup_stats</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#8B949E"># Schedule via background job</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse::CleanupJob.perform_later</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="job-configuration">
+          <h2>Background Job Configuration</h2>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Enable job tracking</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.track_jobs </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Capture job arguments (disabled by default for privacy)</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.capture_job_arguments </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">false</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+          <div class="docs-warning">
+            <p class="paragraph m bold">Privacy Warning</p>
+            <p class="paragraph m">
+              Job argument capture is disabled by default to protect sensitive information. Only enable in development or when explicitly needed for debugging.
+            </p>
+          </div>
+        </section>
+
+        <section id="disabling">
+          <h2>Disabling Rails Pulse</h2>
+          <p class="paragraph m">
+            Disable Rails Pulse per environment:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Disable in test environment</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.enabled </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">!</span><span style="color:#E6EDF3">Rails.env.test?</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Explore Features</h3>
+              <p class="paragraph s secondary">
+                Learn more about the dashboard, SQL tracking, and job monitoring.
+              </p>
+              <a href="features.html" class="button secondary compact">View Features →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Common Questions</h3>
+              <p class="paragraph s secondary">
+                Find answers to frequently asked questions.
+              </p>
+              <a href="faq.html" class="button secondary compact">View FAQ →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>

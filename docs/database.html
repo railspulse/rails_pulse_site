@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-light">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Database Setup - Rails Pulse Documentation</title>
+  <meta content="Configure Rails Pulse with single or separate database options" name="description" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+
+  <!-- Favicon and icons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+
+  <!-- Preload fonts -->
+  <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- Styles -->
+  <link href="../vendor/font-awesome-6.7.2/css/all.min.css" rel="stylesheet" />
+  <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  <link href="../css/docs.css" rel="stylesheet" type="text/css" />
+  <link href="../css/tablet.css" rel="stylesheet" type="text/css" />
+  <link href="../css/mobile.css" rel="stylesheet" type="text/css" />
+  <script src="../js/main.js" type="text/javascript" defer></script>
+  <script src="../js/docs.js" type="text/javascript" defer></script>
+</head>
+
+<body>
+  <div class="background-gradient"></div>
+  <div class="page-container">
+    <header class="nav-container">
+      <a href="../index.html" class="nav-brand">
+        <img src="../images/rails-pulse-logo.png" width="40" height="40" alt="Rails Pulse" />
+        <span>Rails Pulse</span>
+      </a>
+      <nav role="navigation" class="nav-menu" data-navigation>
+        <a href="../index.html#features" class="nav-link">Features</a>
+        <a href="installation.html" class="nav-link">Docs</a>
+        <a href="https://github.com/railspulse/rails_pulse" class="nav-link">GitHub ↗</a>
+        <div class="button-group stacked margin-top-l mobile-only">
+          <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary">Get Started</a>
+        </div>
+      </nav>
+      <div class="button-group">
+        <a href="https://github.com/railspulse/rails_pulse" class="button ghost compact hide-on-mobile">
+          <div class="fa-brands fa-github icon l"></div>
+          <div class="paragraph s tertiary">Star</div>
+        </a>
+        <a href="https://github.com/railspulse/rails_pulse#installation" class="button primary compact">Get Started</a>
+        <button class="button ghost compact nav-hamburger" data-mobile-toggle aria-label="Show menu">
+          <span class="fa-solid fa-bars icon m"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="docs-layout">
+      <aside class="docs-sidebar" data-docs-sidebar>
+        <nav class="docs-sidebar-nav">
+          <a href="installation.html" class="docs-nav-link">Installation</a>
+          <a href="features.html" class="docs-nav-link">Features</a>
+          <a href="authentication.html" class="docs-nav-link">Authentication</a>
+          <a href="database.html" class="docs-nav-link active">Database</a>
+          <a href="tagging.html" class="docs-nav-link">Tagging</a>
+          <a href="advanced.html" class="docs-nav-link">Advanced</a>
+          <a href="performance.html" class="docs-nav-link">Performance</a>
+          <a href="troubleshooting.html" class="docs-nav-link">Troubleshooting</a>
+          <a href="testing.html" class="docs-nav-link">Testing</a>
+          <a href="faq.html" class="docs-nav-link">FAQ</a>
+        </nav>
+      </aside>
+
+      <div class="docs-content">
+        <section>
+          <div class="heading">
+            <h1 class="no-top-margin">Database Setup</h1>
+            <p class="paragraph m secondary">
+              Rails Pulse offers two database setup options: single database (default and recommended) or separate database for complete isolation.
+            </p>
+          </div>
+        </section>
+
+        <section id="single-database">
+          <h2>Option 1: Single Database (Default)</h2>
+          <p class="paragraph m">
+            Stores Rails Pulse data in your main application database alongside your existing tables. This is the simplest setup and works great for most applications.
+          </p>
+
+          <h3>Advantages</h3>
+          <ul>
+            <li><strong>Zero additional configuration</strong> required</li>
+            <li><strong>Simpler backup</strong> and deployment strategies</li>
+            <li><strong>Works with any database</strong> (SQLite, PostgreSQL, MySQL)</li>
+            <li><strong>Easy to get started</strong> - just run migrations</li>
+          </ul>
+
+          <h3>Installation</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">rails generate rails_pulse:install</span></span>
+<span class="line"><span style="color:#E6EDF3">rails db:migrate</span></span></code></pre>
+          </div>
+          <p class="paragraph m secondary">
+            That's it! Rails Pulse tables are created in your main database and ready to use.
+          </p>
+        </section>
+
+        <section id="separate-database">
+          <h2>Option 2: Separate Database</h2>
+          <p class="paragraph m">
+            Stores Rails Pulse data in a dedicated database, completely isolated from your main application.
+          </p>
+
+          <h3>Use a separate database when you want:</h3>
+          <ul>
+            <li><strong>Isolating monitoring data</strong> from your main application database</li>
+            <li><strong>Using different database engines</strong> optimized for time-series data</li>
+            <li><strong>Scaling monitoring independently</strong> from your application</li>
+            <li><strong>Simplified backup strategies</strong> with separate retention policies</li>
+          </ul>
+
+          <h3>Installation</h3>
+          <p class="paragraph m">
+            Install with the <code>--database=separate</code> flag:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">rails generate rails_pulse:install --database=separate</span></span></code></pre>
+          </div>
+
+          <p class="paragraph m">
+            Then configure the <code>connects_to</code> option in your Rails Pulse initializer:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># Single separate database</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.connects_to </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> { </span><span style="color:#79C0FF">writing</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse</span><span style="color:#E6EDF3">, </span><span style="color:#79C0FF">reading</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse</span><span style="color:#E6EDF3"> }</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+
+          <p class="paragraph m">
+            Add the database configuration to <code>config/database.yml</code> and run:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#E6EDF3">rails db:prepare</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="database-config">
+          <h2>Database Configuration Examples</h2>
+
+          <h3>SQLite Configuration</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/database.yml</span></span>
+<span class="line"><span style="color:#79C0FF">production</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># ... your main database ...</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#79C0FF">rails_pulse</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">adapter</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> sqlite3</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> storage/rails_pulse_production.sqlite3</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">migrations_paths</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> db/rails_pulse_migrate</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">pool</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">timeout</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5000</span></span></code></pre>
+          </div>
+
+          <h3>PostgreSQL Configuration</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/database.yml</span></span>
+<span class="line"><span style="color:#79C0FF">production</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># ... your main database ...</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#79C0FF">rails_pulse</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">adapter</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> postgresql</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> myapp_rails_pulse_production</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">username</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> rails_pulse_user</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">password</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">&lt;%= Rails.application.credentials.dig(:rails_pulse, :database_password) %&gt;</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">host</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> localhost</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">migrations_paths</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> db/rails_pulse_migrate</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">pool</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5</span></span></code></pre>
+          </div>
+
+          <h3>MySQL Configuration</h3>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/database.yml</span></span>
+<span class="line"><span style="color:#79C0FF">production</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#8B949E"># ... your main database ...</span></span>
+<span class="line"><span style="color:#E6EDF3">  </span><span style="color:#79C0FF">rails_pulse</span><span style="color:#FF7B72">:</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">adapter</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> mysql2</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> myapp_rails_pulse_production</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">username</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> rails_pulse_user</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">password</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#A5D6FF">&lt;%= Rails.application.credentials.dig(:rails_pulse, :database_password) %&gt;</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">host</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> localhost</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">migrations_paths</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> db/rails_pulse_migrate</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">pool</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">5</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="primary-replica">
+          <h2>Primary/Replica Configuration</h2>
+          <p class="paragraph m">
+            For high-availability setups, configure Rails Pulse with primary and replica databases:
+          </p>
+          <div class="card-code-block dark">
+            <pre class="shiki github-dark-default" style="margin: 0px; color: #e6edf3" tabindex="0"><code><span class="line"><span style="color:#8B949E"># config/initializers/rails_pulse.rb</span></span>
+<span class="line"><span style="color:#E6EDF3">RailsPulse.configure </span><span style="color:#FF7B72">do</span><span style="color:#E6EDF3"> </span><span style="color:#FF7B72">|</span><span style="color:#FFA657">config</span><span style="color:#FF7B72">|</span></span>
+<span class="line"><span style="color:#E6EDF3">  config.connects_to </span><span style="color:#FF7B72">=</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">    </span><span style="color:#79C0FF">database</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#E6EDF3">      </span><span style="color:#79C0FF">writing</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse_primary</span><span style="color:#E6EDF3">,</span></span>
+<span class="line"><span style="color:#E6EDF3">      </span><span style="color:#79C0FF">reading</span><span style="color:#FF7B72">:</span><span style="color:#E6EDF3"> </span><span style="color:#79C0FF">:rails_pulse_replica</span></span>
+<span class="line"><span style="color:#E6EDF3">    }</span></span>
+<span class="line"><span style="color:#E6EDF3">  }</span></span>
+<span class="line"><span style="color:#FF7B72">end</span></span></code></pre>
+          </div>
+        </section>
+
+        <section id="schema-management">
+          <h2>Schema Management</h2>
+          <p class="paragraph m">
+            The schema file <code>db/rails_pulse_schema.rb</code> serves as your single source of truth for the database structure. It:
+          </p>
+          <ul>
+            <li>Defines all Rails Pulse tables in one place</li>
+            <li>Is loaded by the installation migration</li>
+            <li>Should not be deleted or modified</li>
+            <li>Future updates will provide migrations in <code>db/rails_pulse_migrate/</code></li>
+          </ul>
+
+          <div class="docs-note">
+            <p class="paragraph m bold">Important</p>
+            <p class="paragraph m">
+              When using a separate database, always use <code>rails db:prepare</code> instead of <code>rails db:migrate</code> to ensure the schema is loaded correctly.
+            </p>
+          </div>
+        </section>
+
+        <section id="next-steps">
+          <h2>Next Steps</h2>
+          <div class="grid columns-2 gap-l">
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Advanced Configuration</h3>
+              <p class="paragraph s secondary">
+                Customize performance thresholds, tagging, and data cleanup.
+              </p>
+              <a href="advanced.html" class="button secondary compact">View Advanced →</a>
+            </div>
+            <div class="feature-card">
+              <h3 class="color-accent no-top-margin">Common Questions</h3>
+              <p class="paragraph s secondary">
+                Find answers to frequently asked questions.
+              </p>
+              <a href="faq.html" class="button secondary compact">View FAQ →</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-menu">
+        <div>
+          <p class="paragraph s">
+            © 2025 Rails Pulse<br />Open source under the MIT License<br />Built with ❤️ for the Rails community
+          </p>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="installation.html" class="ui s">Documentation</a>
+            <a href="../index.html#features" class="ui s">Features</a>
+            <a href="https://github.com/railspulse/rails_pulse/blob/main/CONTRIBUTING.md" class="ui s" target="_blank">Contributing ↗</a>
+          </div>
+        </div>
+        <div>
+          <div class="link-list">
+            <a href="https://github.com/railspulse/rails_pulse" class="icon-link ui s" target="_blank">
+              <div class="fa-brands fa-github icon m color-accent"></div>
+              <div class="pseudo-link">GitHub</div>
+            </a>
+            <a href="https://github.com/railspulse/rails_pulse/issues" class="icon-link ui s" target="_blank">
+              <div class="fa-solid fa-bug icon m color-accent"></div>
+              <div class="pseudo-link">Issues</div>
+            </a>
+            <a href="../licenses.html" class="icon-link ui s">
+              <div class="fa-solid fa-scale-balanced icon m color-accent"></div>
+              <div class="pseudo-link">License</div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="link-list-horizontal">
+        <a href="https://opensource.org/licenses/MIT" class="ui s tertiary" target="_blank">MIT License</a>
+        <a href="https://github.com/railspulse/rails_pulse/blob/main/README.md" class="ui s tertiary" target="_blank">README</a>
+      </div>
+    </footer>
+  </div>
+
+  <button class="docs-sidebar-toggle" data-docs-sidebar-toggle aria-label="Toggle documentation menu">
+    <span class="fa-solid fa-book icon m"></span>
+    <span>Menu</span>
+  </button>
+</body>
+
+</html>
